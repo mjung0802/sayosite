@@ -13,7 +13,8 @@ const STORAGE_KEY = 'vscode-portfolio-theme'
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem(STORAGE_KEY) as Theme) || 'theme-dark-plus'
+    const stored = localStorage.getItem(STORAGE_KEY)
+    return (THEMES.includes(stored as Theme) ? stored : 'theme-dark-plus') as Theme
   })
 
   useEffect(() => {
