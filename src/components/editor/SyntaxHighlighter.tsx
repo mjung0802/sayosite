@@ -19,7 +19,7 @@ export default function SyntaxHighlighter({ code, language }: Props) {
   const prismTheme = PRISM_THEMES[theme] || themes.vsDark
 
   return (
-    <Highlight theme={prismTheme} code={code.trim()} language={language as never}>
+    <Highlight theme={prismTheme} code={code.trim()} language={language as Parameters<typeof Highlight>[0]['language']}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={`${className} ${styles.pre} editor-font`} style={style}>
           {tokens.map((line, i) => (

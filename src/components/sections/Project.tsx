@@ -7,7 +7,11 @@ function buildTsx(id: string): string {
   if (!p) return `// Project not found: ${id}`
 
   const stackImports = p.stack
-    .map(dep => `import { ${dep.replace(/[^a-zA-Z]/g, '')} } from '${dep.toLowerCase().replace(/\s/g, '-')}'`)
+    .map(dep => {
+      const pkg = dep.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      const identifier = dep.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '')
+      return `import { ${identifier} } from '${pkg}'`
+    })
     .join('\n')
 
   const highlights = p.highlights
