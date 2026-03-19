@@ -14,7 +14,7 @@ export default function EditorContent() {
         <Route path="/resume" element={<Resume />} />
         <Route path="/projects/:id" element={<Project />} />
         <Route path="/hobbies" element={<Hobbies />} />
-        <Route path="/contact" element={<Navigate to="/about" replace />} />
+        <Route path="/contact" element={<div />} />
       </Routes>
     </div>
   )

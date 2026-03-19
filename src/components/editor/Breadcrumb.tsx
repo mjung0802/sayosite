@@ -22,7 +22,7 @@ export default function Breadcrumb() {
   return (
     <div className={styles.breadcrumb}>
       {parts.map((part, i) => (
-        <span key={i} className={styles.part}>
+        <span key={`${part}-${i}`} className={styles.part}>
           {i > 0 && <span className={styles.sep}> › </span>}
           <span className={styles.text}>{part}</span>
         </span>

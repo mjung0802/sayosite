@@ -1,24 +1,8 @@
 import { useState } from 'react'
 import { useTabsContext } from '../../contexts/TabsContext'
-import { FILE_TREE } from '../../data/fileTree'
+import { FILE_TREE, FILE_ICON_LABELS, FILE_ICON_COLORS } from '../../data/fileTree'
 import type { FileNode } from '../../data/fileTree'
 import styles from './FileTree.module.css'
-
-const FILE_ICONS: Record<string, string> = {
-  md: '📝',
-  json: '{}',
-  tsx: '⚛',
-  css: '🎨',
-  sh: '📬',
-}
-
-const ICON_COLORS: Record<string, string> = {
-  md: '#519aba',
-  json: '#cbcb41',
-  tsx: '#519aba',
-  css: '#42a5f5',
-  sh: '#4ec9b0',
-}
 
 interface FileTreeNodeProps {
   node: FileNode
@@ -37,7 +21,10 @@ function FileTreeNode({ node, depth }: FileTreeNodeProps) {
         <div
           className={styles.folderRow}
           style={{ paddingLeft: depth * 12 + 8 }}
+          role="button"
+          tabIndex={0}
           onClick={() => setExpanded(e => !e)}
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setExpanded(v => !v) }}
         >
           <span className={styles.arrow}>{expanded ? '▾' : '▸'}</span>
           <span className={styles.folderIcon}>📁</span>
@@ -54,13 +41,16 @@ function FileTreeNode({ node, depth }: FileTreeNodeProps) {
     <div
       className={`${styles.fileRow} ${isActive ? styles.active : ''}`}
       style={{ paddingLeft: depth * 12 + 8 }}
+      role="button"
+      tabIndex={0}
       onClick={() => openTab(node)}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') openTab(node) }}
     >
       <span
         className={styles.fileIcon}
-        style={{ color: ICON_COLORS[node.icon] || '#cccccc' }}
+        style={{ color: FILE_ICON_COLORS[node.icon] || '#cccccc' }}
       >
-        {FILE_ICONS[node.icon] || '📄'}
+        {FILE_ICON_LABELS[node.icon] || '📄'}
       </span>
       <span className={styles.name}>{node.name}</span>
     </div>

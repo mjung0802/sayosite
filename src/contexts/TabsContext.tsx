@@ -6,22 +6,16 @@ interface TabsContextValue {
   tabs: TabEntry[]
   activeRoute: string
   openTab: (file: FileNode) => void
-  closeTab: (tabId: string, event: React.MouseEvent) => void
+  closeTab: (tabId: string) => void
   activateTab: (tab: TabEntry) => void
   terminalHasInput: boolean
   setTerminalHasInput: (v: boolean) => void
 }
 
-export const TabsContext = createContext<TabsContextValue>({
-  tabs: [],
-  activeRoute: '/about',
-  openTab: () => {},
-  closeTab: () => {},
-  activateTab: () => {},
-  terminalHasInput: false,
-  setTerminalHasInput: () => {},
-})
+export const TabsContext = createContext<TabsContextValue | null>(null)
 
 export function useTabsContext() {
-  return useContext(TabsContext)
+  const ctx = useContext(TabsContext)
+  if (!ctx) throw new Error('useTabsContext must be used within TabsContext.Provider')
+  return ctx
 }

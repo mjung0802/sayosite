@@ -45,13 +45,28 @@ export const FILE_TREE: FileNode[] = [
   },
 ]
 
-// Map route → file node (for tab system)
-export const ROUTE_TO_FILE: Record<string, FileNode> = {
-  '/about': FILE_TREE[0].children![0].children![0],
-  '/resume': FILE_TREE[0].children![0].children![1],
-  '/projects/project1': FILE_TREE[0].children![0].children![2].children![0],
-  '/projects/project2': FILE_TREE[0].children![0].children![2].children![1],
-  '/projects/project3': FILE_TREE[0].children![0].children![2].children![2],
-  '/hobbies': FILE_TREE[0].children![0].children![3],
-  '/contact': FILE_TREE[0].children![1],
+export const FILE_ICON_LABELS: Record<string, string> = {
+  md: '📝',
+  json: '{}',
+  tsx: '⚛',
+  css: '🎨',
+  sh: '📬',
 }
+
+export const FILE_ICON_COLORS: Record<string, string> = {
+  md: '#519aba',
+  json: '#cbcb41',
+  tsx: '#519aba',
+  css: '#42a5f5',
+  sh: '#4ec9b0',
+}
+
+function buildRouteMap(nodes: FileNode[], acc: Record<string, FileNode> = {}): Record<string, FileNode> {
+  for (const node of nodes) {
+    if (node.route) acc[node.route] = node
+    if (node.children) buildRouteMap(node.children, acc)
+  }
+  return acc
+}
+
+export const ROUTE_TO_FILE: Record<string, FileNode> = buildRouteMap(FILE_TREE)

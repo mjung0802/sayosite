@@ -23,7 +23,7 @@ export default function TabBar() {
               isActive={tab.route === activeRoute}
               hasDot={tab.id === 'contact' && terminalHasInput}
               onActivate={() => activateTab(tab)}
-              onClose={(e) => closeTab(tab.id, e)}
+              onClose={() => closeTab(tab.id)}
             />
           </motion.div>
         ))}

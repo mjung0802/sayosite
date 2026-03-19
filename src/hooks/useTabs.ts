@@ -10,7 +10,9 @@ export interface TabEntry {
 }
 
 function routeToTab(route: string): TabEntry | null {
-  const file = ROUTE_TO_FILE[route]
+  // Normalise redirect routes
+  const resolved = route === '/' ? '/about' : route
+  const file = ROUTE_TO_FILE[resolved]
   if (!file || !file.route) return null
   return { id: file.id, file, route: file.route }
 }
@@ -24,7 +26,7 @@ export function useTabs() {
     return initial ? [initial] : []
   })
 
-  const activeRoute = location.pathname
+  const activeRoute = location.pathname === '/' ? '/about' : location.pathname
 
   const openTab = useCallback((file: FileNode) => {
     if (!file.route) return
@@ -36,17 +38,15 @@ export function useTabs() {
     navigate(file.route)
   }, [navigate])
 
-  const closeTab = useCallback((tabId: string, event: React.MouseEvent) => {
-    event.stopPropagation()
+  const closeTab = useCallback((tabId: string) => {
     setTabs(prev => {
       const idx = prev.findIndex(t => t.id === tabId)
       const next = prev.filter(t => t.id !== tabId)
-      // Navigate to adjacent tab if closing active
-      if (prev[idx]?.route === activeRoute && next.length > 0) {
-        const newActive = next[Math.min(idx, next.length - 1)]
-        navigate(newActive.route)
-      } else if (next.length === 0) {
-        navigate('/about')
+      // Navigate if closing the active tab
+      if (prev[idx]?.route === activeRoute) {
+        const target = next.length > 0 ? next[Math.min(idx, next.length - 1)].route : '/about'
+        // Schedule navigation after state update
+        setTimeout(() => navigate(target), 0)
       }
       return next
     })
