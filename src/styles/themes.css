@@ -1,0 +1,122 @@
+/* Dark+ theme (default) */
+body.theme-dark-plus {
+  --vscode-editor-background: #1e1e1e;
+  --vscode-tab-activeBackground: #1e1e1e;
+  --vscode-tab-inactiveBackground: #2d2d2d;
+  --vscode-tab-activeBorder: #007acc;
+  --vscode-tab-inactiveForeground: #969696;
+  --vscode-tab-activeForeground: #ffffff;
+  --vscode-sidebar-background: #252526;
+  --vscode-sidebar-foreground: #cccccc;
+  --vscode-sidebar-border: #3c3c3c;
+  --vscode-activityBar-background: #333333;
+  --vscode-activityBar-foreground: #ffffff;
+  --vscode-activityBar-inactiveForeground: #858585;
+  --vscode-statusBar-background: #007acc;
+  --vscode-statusBar-foreground: #ffffff;
+  --vscode-terminal-background: #1e1e1e;
+  --vscode-terminal-foreground: #cccccc;
+  --vscode-titleBar-background: #3c3c3c;
+  --vscode-titleBar-foreground: #cccccc;
+  --vscode-breadcrumb-background: #1e1e1e;
+  --vscode-breadcrumb-foreground: #858585;
+  --vscode-minimap-background: #252526;
+  --vscode-scrollbar-background: #1e1e1e;
+  --vscode-border: #474747;
+  --vscode-foreground: #cccccc;
+  --syntax-keyword: #569cd6;
+  --syntax-string: #ce9178;
+  --syntax-comment: #6a9955;
+  --syntax-function: #dcdcaa;
+  --syntax-number: #b5cea8;
+  --syntax-operator: #d4d4d4;
+  --syntax-punctuation: #d4d4d4;
+  --syntax-type: #4ec9b0;
+  --syntax-variable: #9cdcfe;
+  --syntax-property: #9cdcfe;
+  --syntax-tag: #569cd6;
+  --syntax-attribute: #9cdcfe;
+  --syntax-selector: #d7ba7d;
+}
+
+/* Monokai theme */
+body.theme-monokai {
+  --vscode-editor-background: #272822;
+  --vscode-tab-activeBackground: #272822;
+  --vscode-tab-inactiveBackground: #3e3d32;
+  --vscode-tab-activeBorder: #f92672;
+  --vscode-tab-inactiveForeground: #75715e;
+  --vscode-tab-activeForeground: #f8f8f2;
+  --vscode-sidebar-background: #1e1f1c;
+  --vscode-sidebar-foreground: #f8f8f2;
+  --vscode-sidebar-border: #3e3d32;
+  --vscode-activityBar-background: #1a1b18;
+  --vscode-activityBar-foreground: #f8f8f2;
+  --vscode-activityBar-inactiveForeground: #75715e;
+  --vscode-statusBar-background: #75715e;
+  --vscode-statusBar-foreground: #f8f8f2;
+  --vscode-terminal-background: #272822;
+  --vscode-terminal-foreground: #f8f8f2;
+  --vscode-titleBar-background: #1a1b18;
+  --vscode-titleBar-foreground: #f8f8f2;
+  --vscode-breadcrumb-background: #272822;
+  --vscode-breadcrumb-foreground: #75715e;
+  --vscode-minimap-background: #1e1f1c;
+  --vscode-scrollbar-background: #272822;
+  --vscode-border: #3e3d32;
+  --vscode-foreground: #f8f8f2;
+  --syntax-keyword: #f92672;
+  --syntax-string: #e6db74;
+  --syntax-comment: #75715e;
+  --syntax-function: #a6e22e;
+  --syntax-number: #ae81ff;
+  --syntax-operator: #f92672;
+  --syntax-punctuation: #f8f8f2;
+  --syntax-type: #66d9ef;
+  --syntax-variable: #f8f8f2;
+  --syntax-property: #a6e22e;
+  --syntax-tag: #f92672;
+  --syntax-attribute: #a6e22e;
+  --syntax-selector: #a6e22e;
+}
+
+/* GitHub Light theme */
+body.theme-github-light {
+  --vscode-editor-background: #ffffff;
+  --vscode-tab-activeBackground: #ffffff;
+  --vscode-tab-inactiveBackground: #f3f3f3;
+  --vscode-tab-activeBorder: #0969da;
+  --vscode-tab-inactiveForeground: #57606a;
+  --vscode-tab-activeForeground: #24292f;
+  --vscode-sidebar-background: #f6f8fa;
+  --vscode-sidebar-foreground: #24292f;
+  --vscode-sidebar-border: #d0d7de;
+  --vscode-activityBar-background: #eaeef2;
+  --vscode-activityBar-foreground: #24292f;
+  --vscode-activityBar-inactiveForeground: #57606a;
+  --vscode-statusBar-background: #0969da;
+  --vscode-statusBar-foreground: #ffffff;
+  --vscode-terminal-background: #f6f8fa;
+  --vscode-terminal-foreground: #24292f;
+  --vscode-titleBar-background: #f6f8fa;
+  --vscode-titleBar-foreground: #57606a;
+  --vscode-breadcrumb-background: #ffffff;
+  --vscode-breadcrumb-foreground: #57606a;
+  --vscode-minimap-background: #f6f8fa;
+  --vscode-scrollbar-background: #ffffff;
+  --vscode-border: #d0d7de;
+  --vscode-foreground: #24292f;
+  --syntax-keyword: #cf222e;
+  --syntax-string: #0a3069;
+  --syntax-comment: #6e7781;
+  --syntax-function: #8250df;
+  --syntax-number: #0550ae;
+  --syntax-operator: #24292f;
+  --syntax-punctuation: #24292f;
+  --syntax-type: #953800;
+  --syntax-variable: #24292f;
+  --syntax-property: #116329;
+  --syntax-tag: #116329;
+  --syntax-attribute: #116329;
+  --syntax-selector: #8250df;
+}

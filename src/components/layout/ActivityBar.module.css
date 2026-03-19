@@ -1,0 +1,33 @@
+.activityBar {
+  width: 48px;
+  background: var(--vscode-activityBar-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  border-right: 1px solid var(--vscode-border);
+  flex-shrink: 0;
+}
+
+.iconBtn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--vscode-activityBar-inactiveForeground);
+  border-left: 2px solid transparent;
+  transition: color 0.15s;
+}
+
+.iconBtn:hover {
+  color: var(--vscode-activityBar-foreground);
+}
+
+.iconBtn.active {
+  color: var(--vscode-activityBar-foreground);
+  border-left-color: var(--vscode-activityBar-foreground);
+}

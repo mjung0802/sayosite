@@ -1,0 +1,14 @@
+.layout {
+  display: grid;
+  grid-template-rows: 35px 1fr auto auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.workbench {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}

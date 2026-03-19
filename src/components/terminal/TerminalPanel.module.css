@@ -1,0 +1,62 @@
+.terminal {
+  height: 220px;
+  background: var(--vscode-terminal-background);
+  border-top: 1px solid var(--vscode-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.header {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--vscode-border);
+  background: var(--vscode-tab-inactiveBackground);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--vscode-terminal-foreground);
+  opacity: 0.7;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  overflow-y: auto;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 13px;
+}
+
+.output {
+  color: var(--vscode-terminal-foreground);
+  opacity: 0.7;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  color: var(--vscode-terminal-foreground);
+  margin-top: 4px;
+}
+
+.prompt {
+  color: #4ec9b0;
+  margin-right: 4px;
+}
+
+.cursor {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
