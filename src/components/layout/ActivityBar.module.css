@@ -9,6 +9,13 @@
   flex-shrink: 0;
 }
 
+.topIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .iconBtn {
   width: 48px;
   height: 48px;
@@ -21,6 +28,7 @@
   color: var(--vscode-activityBar-inactiveForeground);
   border-left: 2px solid transparent;
   transition: color 0.15s;
+  padding: 0;
 }
 
 .iconBtn:hover {

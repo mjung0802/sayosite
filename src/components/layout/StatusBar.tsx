@@ -15,7 +15,7 @@ const LANGUAGE_LABELS: Record<string, string> = {
 
 export default function StatusBar() {
   const { cycleTheme, themeLabel } = useThemeContext()
-  const { activeRoute } = useTabsContext()
+  const { activeRoute, terminalHasInput } = useTabsContext()
   const { commitsThisWeek, isError, isLoading } = useGithubData()
   const [pulsing, setPulsing] = useState(true)
 
@@ -55,7 +55,7 @@ export default function StatusBar() {
         <span className={styles.item}>{getLanguage()}</span>
         <span className={`${styles.item} ${pulsing ? styles.pulse : ''}`}>{commitsLabel}</span>
         <span className={`${styles.item} ${styles.clickable}`} onClick={cycleTheme}>{themeLabel}</span>
-        <span className={styles.item}>🔔</span>
+        <span className={`${styles.item} ${terminalHasInput ? styles.bellActive : ''}`}>🔔</span>
       </div>
     </div>
   )

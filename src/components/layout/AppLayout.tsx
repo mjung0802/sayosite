@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useThemeContext } from '../../contexts/ThemeContext'
 import { TabsContext } from '../../contexts/TabsContext'
 import { useTabs } from '../../hooks/useTabs'
+import { ROUTE_TO_FILE } from '../../data/fileTree'
 import TitleBar from './TitleBar'
 import ActivityBar from './ActivityBar'
 import FileTree from './FileTree'
@@ -15,6 +16,16 @@ export default function AppLayout() {
   const [fileTreeVisible, setFileTreeVisible] = React.useState(true)
   const tabsValue = useTabs()
   const [terminalHasInput, setTerminalHasInput] = useState(false)
+
+  // Seed the about tab on first load if no tabs are open (e.g. navigating to '/')
+  useEffect(() => {
+    const { tabs, openTab } = tabsValue
+    if (tabs.length === 0) {
+      const aboutFile = ROUTE_TO_FILE['/about']
+      if (aboutFile) openTab(aboutFile)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <TabsContext.Provider value={{ ...tabsValue, terminalHasInput, setTerminalHasInput }}>

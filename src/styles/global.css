@@ -40,3 +40,12 @@ body {
   background: var(--vscode-sidebar-foreground);
   opacity: 0.5;
 }
+
+::selection {
+  background: rgba(0, 122, 204, 0.3);
+}
+
+:focus-visible {
+  outline: 1px solid var(--vscode-tab-activeBorder, #007acc);
+  outline-offset: -1px;
+}
