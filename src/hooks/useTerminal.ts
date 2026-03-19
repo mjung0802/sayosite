@@ -8,15 +8,9 @@ export interface TerminalLine {
   text: string
 }
 
-let lineId = 0
 function mkLine(type: TerminalLine['type'], text: string): TerminalLine {
-  return { id: String(lineId++), type, text }
+  return { id: crypto.randomUUID(), type, text }
 }
-
-const WELCOME_LINES: TerminalLine[] = [
-  mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
-  mkLine('output', ''),
-]
 
 interface ContactData {
   name: string
@@ -25,7 +19,10 @@ interface ContactData {
 }
 
 export function useTerminal(onInputChange: (hasInput: boolean) => void) {
-  const [lines, setLines] = useState<TerminalLine[]>(WELCOME_LINES)
+  const [lines, setLines] = useState<TerminalLine[]>(() => [
+    mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
+    mkLine('output', ''),
+  ])
   const [step, setStep] = useState<TerminalStep>('idle')
   const [contactData, setContactData] = useState<Partial<ContactData>>({})
   const [history, setHistory] = useState<string[]>([])
@@ -58,7 +55,10 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
         setStep('name')
         onInputChange(true)
       } else if (cmd === 'clear') {
-        setLines(WELCOME_LINES)
+        setLines([
+          mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
+          mkLine('output', ''),
+        ])
         onInputChange(false)
       } else if (cmd === 'whoami') {
         append(
@@ -113,16 +113,22 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
         // Send via EmailJS
         try {
           const emailjs = await import('@emailjs/browser')
-          await emailjs.default.send(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
-            {
-              from_name: finalData.name,
-              from_email: finalData.email,
-              message: finalData.message,
-            },
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '',
+          const timeoutPromise = new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error('Request timed out')), 10000)
           )
+          await Promise.race([
+            emailjs.default.send(
+              import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
+              import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
+              {
+                from_name: finalData.name,
+                from_email: finalData.email,
+                message: finalData.message,
+              },
+              import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '',
+            ),
+            timeoutPromise,
+          ])
           append(
             mkLine('success', '  ✔ Message delivered.'),
             mkLine('success', `  ✔ Confirmation sent to ${finalData.email}`),
@@ -141,7 +147,10 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
       }
     } else if (step === 'done') {
       // Any key clears
-      setLines(WELCOME_LINES)
+      setLines([
+        mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
+        mkLine('output', ''),
+      ])
       setStep('idle')
       setContactData({})
       onInputChange(false)
