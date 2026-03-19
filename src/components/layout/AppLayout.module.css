@@ -1,6 +1,6 @@
 .layout {
   display: grid;
-  grid-template-rows: 35px 1fr var(--terminal-height, 220px) 22px;
+  grid-template-rows: 35px 1fr auto 22px;
   height: 100vh;
   overflow: hidden;
 }

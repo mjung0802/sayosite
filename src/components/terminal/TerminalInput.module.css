@@ -1,0 +1,33 @@
+.inputRow {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 13px;
+  border-top: 1px solid var(--vscode-border);
+  flex-shrink: 0;
+  cursor: text;
+}
+
+.prompt {
+  color: #4ec9b0;
+  margin-right: 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--vscode-terminal-foreground);
+  font-family: inherit;
+  font-size: inherit;
+  caret-color: var(--vscode-terminal-foreground);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

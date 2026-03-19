@@ -4,6 +4,22 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+}
+
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  cursor: ns-resize;
+  z-index: 10;
+}
+
+.resizeHandle:hover {
+  background: var(--vscode-tab-activeBorder);
+  opacity: 0.5;
 }
 
 .header {
@@ -13,6 +29,15 @@
   padding: 0 12px;
   border-bottom: 1px solid var(--vscode-border);
   background: var(--vscode-tab-inactiveBackground);
+  flex-shrink: 0;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   flex-shrink: 0;
 }
 
@@ -25,37 +50,43 @@
   opacity: 0.7;
 }
 
-.body {
+.username {
+  font-size: 12px;
+  color: var(--syntax-comment);
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.heatmapArea {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  padding: 8px 12px;
-  overflow-y: auto;
-  font-family: 'JetBrains Mono', Consolas, monospace;
-  font-size: 13px;
+  align-items: center;
+  overflow: hidden;
+  justify-content: flex-end;
 }
 
-.output {
+.collapseBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
   color: var(--vscode-terminal-foreground);
-  opacity: 0.7;
+  opacity: 0.6;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
 }
 
-.inputRow {
+.collapseBtn:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.08);
+}
+
+.collapsed {
+  height: 22px;
+  background: var(--vscode-tab-inactiveBackground);
+  border-top: 1px solid var(--vscode-border);
   display: flex;
   align-items: center;
-  color: var(--vscode-terminal-foreground);
-  margin-top: 4px;
-}
-
-.prompt {
-  color: #4ec9b0;
-  margin-right: 4px;
-}
-
-.cursor {
-  animation: blink 1s step-start infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
+  padding: 0 8px;
+  flex-shrink: 0;
 }

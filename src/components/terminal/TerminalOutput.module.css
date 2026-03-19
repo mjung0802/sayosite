@@ -1,0 +1,14 @@
+.output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.line {
+  padding: 1px 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
