@@ -16,7 +16,7 @@ const LANGUAGE_LABELS: Record<string, string> = {
 export default function StatusBar() {
   const { cycleTheme, themeLabel } = useThemeContext()
   const { activeRoute } = useTabsContext()
-  const { commitsThisWeek, lastPushed, isError, isLoading } = useGithubData()
+  const { commitsThisWeek, isError, isLoading } = useGithubData()
   const [pulsing, setPulsing] = useState(true)
 
   useEffect(() => {
@@ -42,7 +42,6 @@ export default function StatusBar() {
 
   // suppress unused warning
   void LANGUAGE_LABELS
-  void lastPushed
 
   return (
     <div className={styles.statusBar}>

@@ -18,7 +18,7 @@
 }
 
 .tooltip {
-  position: fixed;
+  position: absolute;
   background: #1c2128;
   color: #e6edf3;
   border: 1px solid #30363d;
@@ -29,4 +29,5 @@
   pointer-events: none;
   z-index: 9999;
   white-space: nowrap;
+  transform: translateX(-50%);
 }

@@ -19,8 +19,8 @@ function getCellColor(count: number, isError: boolean): string {
 
 interface TooltipState {
   cell: HeatmapCell
-  x: number
-  y: number
+  svgX: number
+  svgY: number
 }
 
 interface Props {
@@ -59,9 +59,8 @@ export default function GithubHeatmap({ cells, isError }: Props) {
               rx={2}
               fill={getCellColor(cell.count, isError)}
               className={styles.cell}
-              onMouseEnter={e => {
-                const rect = (e.target as SVGRectElement).getBoundingClientRect()
-                setTooltip({ cell, x: rect.left, y: rect.top })
+              onMouseEnter={() => {
+                setTooltip({ cell, svgX: x, svgY: y })
               }}
               onMouseLeave={() => setTooltip(null)}
             />
@@ -71,7 +70,10 @@ export default function GithubHeatmap({ cells, isError }: Props) {
       {tooltip && (
         <div
           className={styles.tooltip}
-          style={{ left: tooltip.x, top: tooltip.y - 36 }}
+          style={{
+            left: tooltip.svgX + CELL_SIZE / 2,
+            top: tooltip.svgY - 28,
+          }}
         >
           {isError
             ? 'unavailable'
