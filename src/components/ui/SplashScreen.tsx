@@ -29,6 +29,8 @@ export default function SplashScreen() {
     const stepDuration = totalDuration / steps
 
     let step = 0
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+
     const interval = setInterval(() => {
       step++
       setProgress(Math.min(100, (step / steps) * 100))
@@ -36,14 +38,17 @@ export default function SplashScreen() {
 
       if (step >= steps) {
         clearInterval(interval)
-        setTimeout(() => {
+        timeoutId = setTimeout(() => {
           setVisible(false)
           localStorage.setItem(SPLASH_KEY, '1')
         }, 300)
       }
     }, stepDuration)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      if (timeoutId !== null) clearTimeout(timeoutId)
+    }
   }, [visible])
 
   return (

@@ -22,7 +22,21 @@ export default function IntelliSenseTooltip({ definition, children }: Props) {
   const handleMouseEnter = () => {
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect()
-      setPos({ x: rect.left, y: rect.bottom + 4 })
+      const tooltipWidth = 340 // max-width from CSS
+      const tooltipHeight = 80 // approximate height
+
+      let x = rect.left
+      let y = rect.bottom + 4
+
+      // Keep within viewport
+      if (x + tooltipWidth > window.innerWidth - 8) {
+        x = window.innerWidth - tooltipWidth - 8
+      }
+      if (y + tooltipHeight > window.innerHeight - 8) {
+        y = rect.top - tooltipHeight - 4 // show above instead
+      }
+
+      setPos({ x, y })
     }
     setVisible(true)
   }

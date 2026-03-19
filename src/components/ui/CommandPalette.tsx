@@ -72,6 +72,10 @@ export default function CommandPalette({ open, onClose }: Props) {
     const handleKey = (e: KeyboardEvent) => {
       if (!open) return
       if (e.key === 'Escape') { onClose(); return }
+      if (e.key === 'Tab') {
+        e.preventDefault() // only one focusable element, keep focus on input
+        return
+      }
       if (e.key === 'ArrowDown') {
         e.preventDefault()
         setSelected(s => Math.min(s + 1, filtered.length - 1))
@@ -103,6 +107,9 @@ export default function CommandPalette({ open, onClose }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.96 }}
             transition={{ duration: 0.15 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Command Palette"
           >
             <div className={styles.inputRow}>
               <span className={styles.searchIcon}>⌕</span>
@@ -113,10 +120,14 @@ export default function CommandPalette({ open, onClose }: Props) {
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Go to file..."
                 autoComplete="off"
+                role="combobox"
+                aria-expanded={true}
+                aria-controls="palette-results"
+                aria-autocomplete="list"
               />
               <kbd className={styles.esc}>Esc</kbd>
             </div>
-            <div className={styles.results}>
+            <div className={styles.results} id="palette-results" role="listbox">
               {filtered.length === 0 && (
                 <div className={styles.empty}>No results</div>
               )}
@@ -126,6 +137,8 @@ export default function CommandPalette({ open, onClose }: Props) {
                   className={`${styles.item} ${i === selected ? styles.selected : ''}`}
                   onClick={() => navigate_to(item)}
                   onMouseEnter={() => setSelected(i)}
+                  role="option"
+                  aria-selected={i === selected}
                 >
                   <span className={styles.itemIcon}>{item.icon}</span>
                   <div className={styles.itemText}>
