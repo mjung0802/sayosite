@@ -1,0 +1,28 @@
+.breadcrumb {
+  height: 22px;
+  background: var(--vscode-breadcrumb-background);
+  border-bottom: 1px solid var(--vscode-border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.part {
+  display: flex;
+  align-items: center;
+  color: var(--vscode-breadcrumb-foreground);
+}
+
+.sep {
+  opacity: 0.5;
+}
+
+.text {
+  cursor: pointer;
+}
+
+.text:hover {
+  color: var(--vscode-sidebar-foreground);
+}

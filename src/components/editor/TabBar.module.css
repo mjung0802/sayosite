@@ -1,0 +1,14 @@
+.tabBar {
+  height: 35px;
+  background: var(--vscode-tab-inactiveBackground);
+  border-bottom: 1px solid var(--vscode-border);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.tabBar::-webkit-scrollbar {
+  height: 3px;
+}

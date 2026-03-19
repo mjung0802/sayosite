@@ -7,20 +7,77 @@
   flex-direction: column;
   overflow-y: auto;
   flex-shrink: 0;
+  user-select: none;
 }
 
 .header {
   padding: 8px 12px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--vscode-sidebar-foreground);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.folderRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.folderRow:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  cursor: pointer;
+  font-size: 13px;
+  border-left: 2px solid transparent;
+}
+
+.fileRow:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.fileRow.active {
+  background: rgba(255,255,255,0.08);
+  border-left-color: var(--vscode-tab-activeBorder);
+}
+
+.arrow {
+  font-size: 10px;
+  width: 12px;
+  flex-shrink: 0;
   opacity: 0.7;
 }
 
-.placeholder {
-  padding: 8px 12px;
-  font-size: 12px;
-  opacity: 0.5;
+.folderIcon {
+  font-size: 14px;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.fileIcon {
+  font-size: 13px;
+  width: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+}
+
+.name {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
