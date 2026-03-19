@@ -1,6 +1,9 @@
+import { useGithubData } from '../../hooks/useGithubData'
 import styles from './TitleBar.module.css'
 
 export default function TitleBar() {
+  const { lastPushed } = useGithubData()
+
   return (
     <div className={styles.titleBar}>
       <div className={styles.trafficLights}>
@@ -9,8 +12,9 @@ export default function TitleBar() {
         <span className={`${styles.dot} ${styles.green}`} />
       </div>
       <div className={styles.title}>
+        <span className={styles.titleDot}>●</span>
         <span className={styles.titleText}>portfolio.code</span>
-        <span className={styles.subtitle}>— last pushed recently</span>
+        <span className={styles.subtitle}>— last pushed {lastPushed}</span>
       </div>
     </div>
   )
