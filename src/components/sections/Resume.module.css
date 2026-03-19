@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.annotations {
+  padding: 16px 24px;
+  border-top: 1px solid var(--vscode-border);
+  background: var(--vscode-editor-background);
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 12px;
+}
+
+.annotationTitle {
+  color: var(--syntax-comment);
+  margin-bottom: 8px;
+}
+
+.annotationItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.token {
+  color: var(--syntax-string);
+  cursor: help;
+}
+
+.type {
+  color: var(--syntax-type);
+  font-size: 11px;
+  opacity: 0.6;
+}

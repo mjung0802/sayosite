@@ -9,6 +9,7 @@ import FileTree from './FileTree'
 import EditorArea from '../editor/EditorArea'
 import TerminalPanel from '../terminal/TerminalPanel'
 import StatusBar from './StatusBar'
+import CommandPalette from '../ui/CommandPalette'
 import styles from './AppLayout.module.css'
 
 export default function AppLayout() {
@@ -16,6 +17,7 @@ export default function AppLayout() {
   const [fileTreeVisible, setFileTreeVisible] = React.useState(true)
   const tabsValue = useTabs()
   const [terminalHasInput, setTerminalHasInput] = useState(false)
+  const [paletteOpen, setPaletteOpen] = useState(false)
 
   // Seed the about tab on first load if no tabs are open (e.g. navigating to '/')
   useEffect(() => {
@@ -25,6 +27,17 @@ export default function AppLayout() {
       if (aboutFile) openTab(aboutFile)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'p') {
+        e.preventDefault()
+        setPaletteOpen(v => !v)
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
   }, [])
 
   return (
@@ -39,6 +52,7 @@ export default function AppLayout() {
         <TerminalPanel />
         <StatusBar />
       </div>
+      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </TabsContext.Provider>
   )
 }
