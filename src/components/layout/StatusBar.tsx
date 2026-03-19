@@ -4,15 +4,6 @@ import { useTabsContext } from '../../contexts/TabsContext'
 import { useGithubData } from '../../hooks/useGithubData'
 import styles from './StatusBar.module.css'
 
-// Map file icon type to language label
-const LANGUAGE_LABELS: Record<string, string> = {
-  md: 'Markdown',
-  json: 'JSON',
-  tsx: 'TypeScript JSX',
-  css: 'CSS',
-  sh: 'Shell Script',
-}
-
 export default function StatusBar() {
   const { cycleTheme, themeLabel } = useThemeContext()
   const { activeRoute, terminalHasInput } = useTabsContext()
@@ -39,9 +30,6 @@ export default function StatusBar() {
     : isError
     ? '↑ —'
     : `↑ ${commitsThisWeek} commit${commitsThisWeek !== 1 ? 's' : ''} this week`
-
-  // suppress unused warning
-  void LANGUAGE_LABELS
 
   return (
     <div className={styles.statusBar}>

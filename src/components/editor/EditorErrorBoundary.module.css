@@ -1,0 +1,32 @@
+.errorState {
+  padding: 32px;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 13px;
+  color: var(--vscode-foreground);
+}
+
+.errorTitle {
+  color: var(--syntax-comment);
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.errorMessage {
+  color: #f48771;
+  margin-bottom: 16px;
+}
+
+.retryBtn {
+  background: none;
+  border: 1px solid var(--vscode-border);
+  color: var(--vscode-foreground);
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.retryBtn:hover {
+  background: rgba(255,255,255,0.08);
+}
