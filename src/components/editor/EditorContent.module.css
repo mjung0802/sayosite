@@ -1,6 +1,5 @@
 .content {
   flex: 1;
   overflow: auto;
-  padding: 16px 24px;
-  color: var(--vscode-foreground);
+  min-height: 0;
 }
