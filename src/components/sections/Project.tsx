@@ -28,7 +28,7 @@ function buildTsx(id: string): string {
  *
  * @highlights
 ${highlights}
- *${p.github ? `\n * @link     https://${p.github}` : ''}${p.demo ? `\n * @demo     https://${p.demo}` : ''}
+ *${p.github ? `\n * @link     https://${p.github}` : ''}${p.demo ? `\n * @demo     ${p.demo}` : ''}
  */
 
 interface ${p.name}Props {

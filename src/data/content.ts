@@ -124,7 +124,7 @@ export const resumeContent = {
 }
 
 export const projectsContent: Record<string, Project> = {
-  'ngu-guide': {
+  project1: {
     id: 'ngu-guide',
     name: 'NGU Idle Guide',
     description: 'A comprehensive crowdsourced guide for the incremental idle game "NGU Idle", which clarifies complex game mechanics and provides optimal strategies for players to progress efficiently through a game that takes over a year to complete.',
@@ -137,7 +137,7 @@ export const projectsContent: Record<string, Project> = {
       'Built with Astro and React for a fast, responsive experience, and deployed via GitHub Pages with automated CI/CD pipelines',
     ],
   },
-  'tone-chat': {
+  project2: {
     id: 'tone-chat',
     name: 'Tone Chat',
     description: 'A multi-platform chat application built with React Native and Node.js, featuring real-time messaging, tone-based message styling, and customizable themes.',
@@ -150,7 +150,7 @@ export const projectsContent: Record<string, Project> = {
       'Customizable themes and user profiles for a personalized chat experience',
     ],
   },
-  'happytohelp': {
+  project3: {
     id: 'happytohelp',
     name: "I'd be happy to help!",
     description: 'A web game where players take on the role of an AI LLM assistant, traversing through the history of LLM development and possible futures, while learning about the ethical and societal implications of AI along the way.',
@@ -172,7 +172,7 @@ export const hobbiesContent: Hobby[] = [
       cuisine: '"Asian and Mexican-inspired home cooking"',
       diners: '"family of 3"',
       'signature-dish': '"beef enoki rolls"',
-      cookbooks: '"The Joy of Cooking" and "The Food Lab"',
+      cookbooks: '"The Joy of Cooking and The Food Lab"',
     },
   },
   {
