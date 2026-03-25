@@ -68,13 +68,8 @@ export default function TerminalPanel() {
 
       {/* Header */}
       <div className={styles.header}>
-        <div className={styles.headerLeft}>
-          <span className={styles.title}>TERMINAL</span>
-          <span className={styles.username}>github/mjung0802</span>
-        </div>
-        <div className={styles.heatmapArea}>
-          <GithubHeatmap cells={heatmapData} isError={isError} />
-        </div>
+        <span className={styles.title}>TERMINAL</span>
+        <span className={styles.username}>github/mjung0802</span>
         <button
           className={styles.collapseBtn}
           onClick={() => setCollapsed(true)}
@@ -84,15 +79,20 @@ export default function TerminalPanel() {
         </button>
       </div>
 
-      {/* Output */}
-      <TerminalOutput lines={lines} />
+      {/* Heatmap overlaid on terminal body, absolutely positioned */}
+      <div className={styles.heatmapOverlay}>
+        <GithubHeatmap cells={heatmapData} isError={isError} />
+      </div>
 
-      {/* Input */}
-      <TerminalInput
-        onSubmit={handleCommand}
-        onHistoryNavigate={navigateHistory}
-        disabled={step === 'sending'}
-      />
+      {/* Text area — restricted horizontally via padding-right */}
+      <div className={styles.terminalBody}>
+        <TerminalOutput lines={lines} />
+        <TerminalInput
+          onSubmit={handleCommand}
+          onHistoryNavigate={navigateHistory}
+          disabled={step === 'sending'}
+        />
+      </div>
     </div>
   )
 }

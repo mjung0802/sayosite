@@ -1,7 +1,75 @@
-.wrapper {
+.splitContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pane {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.paneHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--vscode-tab-inactiveBackground);
+  border-bottom: 1px solid var(--vscode-border);
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.paneIcon {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.paneLabel {
+  color: var(--vscode-foreground);
+  opacity: 0.85;
+}
+
+.paneSubLabel {
+  color: var(--vscode-foreground);
+  opacity: 0.4;
+  font-size: 11px;
+}
+
+.jsonPane {
+  border-right: 1px solid var(--vscode-sidebar-background);
+}
+
+.pdfPane {
+  /* no extra styles needed */
+}
+
+.paneContent {
+  flex: 1;
+  overflow: hidden;
+}
+
+.jsonContent {
+  overflow-y: auto;
+}
+
+.pdfContent {
+  overflow: hidden;
+}
+
+.pdfFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+  display: block;
 }
 
 .annotations {

@@ -12,9 +12,10 @@ const PRISM_THEMES = {
 interface Props {
   code: string
   language: string
+  wordWrap?: boolean
 }
 
-export default function SyntaxHighlighter({ code, language }: Props) {
+export default function SyntaxHighlighter({ code, language, wordWrap }: Props) {
   const { theme } = useThemeContext()
   const prismTheme = PRISM_THEMES[theme] || themes.vsDark
 
@@ -25,7 +26,7 @@ export default function SyntaxHighlighter({ code, language }: Props) {
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({ line })} className={styles.line}>
               <span className={styles.lineNumber}>{i + 1}</span>
-              <span className={styles.lineContent}>
+              <span className={wordWrap ? styles.lineContentWrapped : styles.lineContent}>
                 {line.map((token, key) => (
                   <span key={key} {...getTokenProps({ token })} />
                 ))}

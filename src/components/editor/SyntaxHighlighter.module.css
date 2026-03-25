@@ -34,3 +34,9 @@
   flex: 1;
   white-space: pre;
 }
+
+.lineContentWrapped {
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

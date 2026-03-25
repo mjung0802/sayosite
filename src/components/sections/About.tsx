@@ -21,5 +21,5 @@ ${aboutContent.bio}
 }
 
 export default function About() {
-  return <SyntaxHighlighter code={buildMarkdown()} language="markdown" />
+  return <SyntaxHighlighter code={buildMarkdown()} language="markdown" wordWrap />
 }
