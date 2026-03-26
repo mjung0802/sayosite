@@ -1,6 +1,7 @@
 import { useRef, useCallback, useState } from 'react'
 import { useTabsContext } from '../../contexts/TabsContext'
 import { useGithubData } from '../../hooks/useGithubData'
+import { contactContent } from '../../data/content'
 import { useTerminal } from '../../hooks/useTerminal'
 import GithubHeatmap from './GithubHeatmap'
 import TerminalOutput from './TerminalOutput'
@@ -69,7 +70,7 @@ export default function TerminalPanel() {
       {/* Header */}
       <div className={styles.header}>
         <span className={styles.title}>TERMINAL</span>
-        <span className={styles.username}>github/mjung0802</span>
+        <a href={contactContent.github} target="_blank" rel="noreferrer" className={styles.username}>github/mjung0802</a>
         <button
           className={styles.collapseBtn}
           onClick={() => setCollapsed(true)}

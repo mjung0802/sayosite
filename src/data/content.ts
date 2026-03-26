@@ -130,19 +130,6 @@ export const resumeContent = {
 
 export const projectsContent: Record<string, Project> = {
   project1: {
-    id: 'ngu-guide',
-    name: 'NGU Idle Guide',
-    description: 'A comprehensive crowdsourced guide for the incremental idle game "NGU Idle", which clarifies complex game mechanics and provides optimal strategies for players to progress efficiently through a game that takes over a year to complete.',
-    stack: ['Astro', 'React', 'TypeScript', 'GitHub Actions'],
-    github: 'github.com/sayolove/ngu-guide',
-    demo: 'https://sayolove.github.io/ngu-guide/en/intro/',
-    highlights: [
-      'Primarily a documentation effort, involved months of gathering and organizing community knowledge into a cohesive, user-friendly format',
-      'The first comprehensive guide for NGU Idle, filling a critical gap in the player community and becoming the go-to resource for new and veteran players alike',
-      'Built with Astro and React for a fast, responsive experience, and deployed via GitHub Pages with automated CI/CD pipelines',
-    ],
-  },
-  project2: {
     id: 'tone-chat',
     name: 'Tone Chat',
     description: 'A multi-platform chat application built with React Native and Node.js, featuring real-time messaging, tone-based message styling, and customizable themes.',
@@ -153,6 +140,19 @@ export const projectsContent: Record<string, Project> = {
       'Real-time messaging with WebSockets and Socket.io',
       'Tone-based message styling so users can express emotions through their messages',
       'Customizable themes and user profiles for a personalized chat experience',
+    ],
+  },
+  project2: {
+    id: 'ngu-guide',
+    name: 'NGU Idle Guide',
+    description: 'A comprehensive crowdsourced guide for the incremental idle game "NGU Idle", which clarifies complex game mechanics and provides optimal strategies for players to progress efficiently through a game that takes over a year to complete.',
+    stack: ['Astro', 'React', 'TypeScript', 'GitHub Actions'],
+    github: 'github.com/sayolove/ngu-guide',
+    demo: 'https://sayolove.github.io/ngu-guide/en/intro/',
+    highlights: [
+      'Primarily a documentation effort, involved months of gathering and organizing community knowledge into a cohesive, user-friendly format',
+      'The first comprehensive guide for NGU Idle, filling a critical gap in the player community and becoming the go-to resource for new and veteran players alike',
+      'Built with Astro and React for a fast, responsive experience, and deployed via GitHub Pages with automated CI/CD pipelines',
     ],
   },
   project3: {
