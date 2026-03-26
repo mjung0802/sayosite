@@ -15,7 +15,34 @@ interface GithubData {
   isLoading: boolean
 }
 
+interface ContributionDay {
+  date: string
+  contributionCount: number
+}
+
+interface ContributionWeek {
+  contributionDays: ContributionDay[]
+}
+
 const USERNAME = 'mjung0802'
+
+const GITHUB_QUERY = `
+  query($login: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $login) {
+      updatedAt
+      contributionsCollection(from: $from, to: $to) {
+        contributionCalendar {
+          weeks {
+            contributionDays {
+              date
+              contributionCount
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 function formatRelativeTime(isoDate: string): string {
   const diff = Date.now() - new Date(isoDate).getTime()
@@ -30,83 +57,75 @@ function formatRelativeTime(isoDate: string): string {
   return `${months} month${months !== 1 ? 's' : ''} ago`
 }
 
-function buildHeatmap(events: Array<{ type: string; created_at: string }>): HeatmapCell[] {
-  // Build 12 weeks of data (84 days), oldest first
-  const now = new Date()
+function buildHeatmapFromCalendar(weeks: ContributionWeek[]): HeatmapCell[] {
+  const last12 = weeks.slice(-12)
   const cells: HeatmapCell[] = []
-  const commitsByDate: Record<string, number> = {}
-
-  // Count push events by date
-  for (const event of events) {
-    if (event.type === 'PushEvent') {
-      const date = event.created_at.split('T')[0]
-      commitsByDate[date] = (commitsByDate[date] || 0) + 1
-    }
-  }
-
-  // Build grid: 12 weeks × 7 days
-  for (let week = 0; week < 12; week++) {
-    for (let day = 0; day < 7; day++) {
-      const daysBack = (11 - week) * 7 + (6 - day)
-      const date = new Date(now)
-      date.setDate(date.getDate() - daysBack)
-      const dateStr = date.toISOString().split('T')[0]
+  last12.forEach((week, weekIndex) => {
+    week.contributionDays.forEach((day, dayIndex) => {
       cells.push({
-        date: dateStr,
-        count: commitsByDate[dateStr] || 0,
-        weekIndex: week,
-        dayIndex: day,
+        date: day.date,
+        count: day.contributionCount,
+        weekIndex,
+        dayIndex,
       })
-    }
-  }
-
+    })
+  })
   return cells
 }
 
-function getCommitsThisWeek(cells: HeatmapCell[]): number {
-  // Last 7 cells = last 7 days
-  return cells.slice(-7).reduce((sum, c) => sum + c.count, 0)
+function getCommitsThisWeek(weeks: ContributionWeek[]): number {
+  const lastWeek = weeks[weeks.length - 1]
+  return lastWeek
+    ? lastWeek.contributionDays.reduce((sum, d) => sum + d.contributionCount, 0)
+    : 0
 }
 
-async function fetchEvents() {
-  const res = await fetch(`https://api.github.com/users/${USERNAME}/events/public`)
-  if (!res.ok) throw new Error('GitHub API error')
-  return res.json()
-}
+async function fetchGithubContributions() {
+  const now = new Date()
+  const from = new Date(now)
+  from.setDate(from.getDate() - 84) // 12 weeks back
 
-async function fetchUser() {
-  const res = await fetch(`https://api.github.com/users/${USERNAME}`)
-  if (!res.ok) throw new Error('GitHub API error')
-  return res.json()
+  const res = await fetch('/api/github', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: GITHUB_QUERY,
+      variables: {
+        login: USERNAME,
+        from: from.toISOString(),
+        to: now.toISOString(),
+      },
+    }),
+  })
+
+  if (!res.ok) throw new Error('GitHub proxy error')
+  const json = await res.json()
+  if (json.errors) throw new Error('GitHub GraphQL error')
+  return json.data
 }
 
 export function useGithubData(): GithubData {
-  const eventsQuery = useQuery({
-    queryKey: ['github-events', USERNAME],
-    queryFn: fetchEvents,
+  const query = useQuery({
+    queryKey: ['github-contributions', USERNAME],
+    queryFn: fetchGithubContributions,
     staleTime: 1000 * 60 * 60,
     retry: 1,
   })
 
-  const userQuery = useQuery({
-    queryKey: ['github-user', USERNAME],
-    queryFn: fetchUser,
-    staleTime: 1000 * 60 * 60,
-    retry: 1,
-  })
+  const weeks: ContributionWeek[] =
+    query.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? []
 
-  const isError = eventsQuery.isError || userQuery.isError
-  const isLoading = eventsQuery.isLoading || userQuery.isLoading
-
-  const heatmapData = eventsQuery.data
-    ? buildHeatmap(eventsQuery.data)
-    : buildHeatmap([]) // empty grid on error/loading
-
-  const commitsThisWeek = getCommitsThisWeek(heatmapData)
-
-  const lastPushed = userQuery.data?.updated_at
-    ? formatRelativeTime(userQuery.data.updated_at)
+  const heatmapData = buildHeatmapFromCalendar(weeks)
+  const commitsThisWeek = getCommitsThisWeek(weeks)
+  const lastPushed = query.data?.user?.updatedAt
+    ? formatRelativeTime(query.data.user.updatedAt)
     : 'recently'
 
-  return { heatmapData, commitsThisWeek, lastPushed, isError, isLoading }
+  return {
+    heatmapData,
+    commitsThisWeek,
+    lastPushed,
+    isError: query.isError,
+    isLoading: query.isLoading,
+  }
 }
