@@ -40,3 +40,10 @@
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+.tokenLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  cursor: pointer;
+}

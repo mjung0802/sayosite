@@ -2,6 +2,15 @@ import { Highlight, themes } from 'prism-react-renderer'
 import { useThemeContext } from '../../contexts/ThemeContext'
 import styles from './SyntaxHighlighter.module.css'
 
+function getLinkHref(raw: string): string | null {
+  const s = raw.replace(/^["']|["']$/g, '')
+  if (s.startsWith('https://') || s.startsWith('http://')) return s
+  if (s.startsWith('mailto:')) return s
+  if (s.startsWith('github.com/')) return `https://${s}`
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)) return `mailto:${s}`
+  return null
+}
+
 // Map our theme names to prism-react-renderer themes
 const PRISM_THEMES = {
   'theme-dark-plus': themes.vsDark,
@@ -27,9 +36,12 @@ export default function SyntaxHighlighter({ code, language, wordWrap }: Props) {
             <div key={i} {...getLineProps({ line })} className={styles.line}>
               <span className={styles.lineNumber}>{i + 1}</span>
               <span className={wordWrap ? styles.lineContentWrapped : styles.lineContent}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
+                {line.map((token, key) => {
+                  const href = getLinkHref(token.content)
+                  return href
+                    ? <a key={key} href={href} target="_blank" rel="noreferrer" className={styles.tokenLink}><span {...getTokenProps({ token })} /></a>
+                    : <span key={key} {...getTokenProps({ token })} />
+                })}
               </span>
             </div>
           ))}

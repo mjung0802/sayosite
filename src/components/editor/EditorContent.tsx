@@ -7,6 +7,7 @@ const About = lazy(() => import('../sections/About'))
 const Resume = lazy(() => import('../sections/Resume'))
 const Project = lazy(() => import('../sections/Project'))
 const Hobbies = lazy(() => import('../sections/Hobbies'))
+const Contact = lazy(() => import('../sections/Contact'))
 
 export default function EditorContent() {
   return (
@@ -19,7 +20,7 @@ export default function EditorContent() {
             <Route path="/resume" element={<Resume />} />
             <Route path="/projects/:id" element={<Project />} />
             <Route path="/hobbies" element={<Hobbies />} />
-            <Route path="/contact" element={<div />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </Suspense>
       </EditorErrorBoundary>

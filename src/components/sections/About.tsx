@@ -15,8 +15,8 @@ ${aboutContent.bio}
 
 ## Contact
 
-- **GitHub:** [${aboutContent.github}](${aboutContent.github})
-- **Email:** [${aboutContent.email}](mailto:${aboutContent.email})
+- [GitHub](${aboutContent.github})
+- [Email](mailto:${aboutContent.email})
 `
 }
 

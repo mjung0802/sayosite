@@ -29,6 +29,11 @@ export interface Hobby {
   properties: Record<string, string>
 }
 
+export const contactContent = {
+  email: 'daniel0802@gmail.com',
+  github: 'https://github.com/mjung0802',
+}
+
 export const aboutContent = {
   name: 'Daniel',
   fullName: 'Daniel Jung',

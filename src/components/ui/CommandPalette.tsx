@@ -15,11 +15,11 @@ interface PaletteItem {
 const ITEMS: PaletteItem[] = [
   { label: 'about.md', description: 'About Me', route: '/about', icon: '📝' },
   { label: 'resume.json', description: 'Resume & Experience', route: '/resume', icon: '{}' },
-  { label: 'project1.tsx', description: 'DevFlow — developer productivity platform', route: '/projects/project1', icon: '⚛' },
-  { label: 'project2.tsx', description: 'Synthwave — browser synthesizer', route: '/projects/project2', icon: '⚛' },
-  { label: 'project3.tsx', description: 'Cartographer — collaborative maps', route: '/projects/project3', icon: '⚛' },
+  { label: 'tone-chat.tsx', description: 'Tone Chat — a tone-based chat application', route: '/projects/project1', icon: '⚛' },
+  { label: 'ngu-guide.tsx', description: 'NGU Idle Guide — a crowdsourced guide for the incremental idle game', route: '/projects/project2', icon: '⚛' },
+  { label: 'happytohelp.tsx', description: 'I\'d be happy to help! — a game about being an AI assistant', route: '/projects/project3', icon: '⚛' },
   { label: 'hobbies.css', description: 'Hobbies & Interests', route: '/hobbies', icon: '🎨' },
-  { label: 'contact.sh', description: 'Contact — open terminal', route: '/contact', icon: '📬' },
+  { label: 'contact.sh', description: 'Contact Me', route: '/contact', icon: '📬' },
 ]
 
 function fuzzyMatch(query: string, text: string): boolean {

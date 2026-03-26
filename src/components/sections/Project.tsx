@@ -24,26 +24,13 @@ function buildTsx(id: string): string {
  * @project  ${p.name}
  * @description ${p.description}
  *
- * @stack    ${p.stack.join(', ')}
- *
  * @highlights
 ${highlights}
  *${p.github ? `\n * @link     https://${p.github}` : ''}${p.demo ? `\n * @demo     ${p.demo}` : ''}
  */
 
-interface ${p.name}Props {
-  id: string
-  title: string
-  description: string
-  stack: string[]
-  links: {
-    github?: string
-    demo?: string
-  }
-}
-
-export default function ${p.name}({ id, title, description, stack, links }: ${p.name}Props) {
-  return (
+export default function ${p.name.replace(/\s+/g, '')}({ id, title, description, stack, links }: ${p.name.replace(/\s+/g, '')}Props) {
+${p.github && !p.github.includes(' ') ? `  const GITHUB_URL = "https://${p.github}"\n` : ''}${p.demo && p.demo.startsWith('https://') ? `  const DEMO_URL = "${p.demo}"\n` : ''}  return (
     <ProjectCard
       id={id}
       title={title}
@@ -53,15 +40,6 @@ export default function ${p.name}({ id, title, description, stack, links }: ${p.
     />
   )
 }
-
-// Usage:
-// <${p.name}
-//   id="${p.id}"
-//   title="${p.name}"
-//   description="${p.description}"
-//   stack={[${p.stack.map(s => `"${s}"`).join(', ')}]}
-//   links={{ ${p.github ? `github: "https://${p.github}"` : ''}${p.demo ? `, demo: "https://${p.demo}"` : ''} }}
-// />
 `
 }
 
