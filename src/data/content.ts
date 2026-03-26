@@ -172,7 +172,7 @@ export const hobbiesContent: Hobby[] = [
       cuisine: '"Asian and Mexican-inspired home cooking"',
       diners: '"family of 3"',
       'signature-dish': '"beef enoki rolls"',
-      cookbooks: '"The Joy of Cooking and The Food Lab"',
+      'favorite-cookbooks': '"The Joy of Cooking, The Food Lab"',
     },
   },
   {
@@ -185,7 +185,7 @@ export const hobbiesContent: Hobby[] = [
     },
   },
   {
-    name: 'event planning',
+    name: 'event-planning',
     properties: {
       types: '"karaoke, game nights, potlucks, and more!"',
       'max-attendees': '32',

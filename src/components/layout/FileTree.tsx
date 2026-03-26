@@ -26,7 +26,13 @@ function FileTreeNode({ node, depth }: FileTreeNodeProps) {
           onClick={() => setExpanded(e => !e)}
           onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setExpanded(v => !v) }}
         >
-          <span className={styles.arrow}>{expanded ? '▾' : '▸'}</span>
+          <svg
+            className={`${styles.arrow} ${expanded ? styles.arrowOpen : ''}`}
+            width="16" height="16" viewBox="0 0 16 16"
+            fill="currentColor"
+          >
+            <path d="M6 4l4 4-4 4" />
+          </svg>
           <span className={styles.folderIcon}>📁</span>
           <span className={styles.name}>{node.name}</span>
         </div>
