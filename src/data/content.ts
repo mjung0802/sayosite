@@ -38,11 +38,11 @@ export const aboutContent = {
   name: 'Daniel',
   fullName: 'Daniel Jung',
   role: 'Software Engineer',
-  bio: `Hi, I'm Daniel - a software engineer who loves building interesting projects that live at the intersection of great UX and solid engineering.
+  bio: `Hi, I'm Daniel - a software engineer who loves building interesting projects at the intersection of great UX and solid engineering.
 
-I specialize in full-stack web development with a focus on TypeScript, React, and Node.js. I care about writing clean, maintainable code and shipping products that people actually enjoy using.
+I specialize in full-stack web development using TypeScript (Node.js/React), but I'm flexible with languages and frameworks and always eager to learn new ones. I care about writing clean, maintainable code and shipping products that people actually enjoy using.
 
-When I'm not coding, you'll find me tinkering with side projects, cooking for my family, or hosting events for my community.`,
+When I'm not coding, you'll find me cooking for my family, playing games with my fiancée, or hosting events for my community.`,
   location: 'Chandler, AZ',
   email: 'daniel0802@gmail.com',
   github: 'https://github.com/mjung0802',
@@ -157,7 +157,7 @@ export const projectsContent: Record<string, Project> = {
   },
   project3: {
     id: 'happytohelp',
-    name: "I'd be happy to help!",
+    name: "Happy To Help",
     description: 'A web game where players take on the role of an AI LLM assistant, traversing through the history of LLM development and possible futures, while learning about the ethical and societal implications of AI along the way.',
     stack: ['Svelte', 'Vite', 'TypeScript'],
     github: 'github.com/mjung0802/happytohelp (private WIP)',

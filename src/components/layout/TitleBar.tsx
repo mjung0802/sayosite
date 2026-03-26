@@ -13,7 +13,7 @@ export default function TitleBar() {
       </div>
       <div className={styles.title}>
         <span className={styles.titleDot}>●</span>
-        <span className={styles.titleText}>portfolio.code</span>
+        <span className={styles.titleText}>sayo.site</span>
         <span className={styles.subtitle}>— last pushed {lastPushed}</span>
       </div>
     </div>
