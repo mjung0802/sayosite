@@ -4,6 +4,13 @@ This file documents all architectural and design decisions for this project. Ref
 
 ---
 
+## Index System
+
+Every directory under `src/` contains an `index.md` summarizing its files.
+**Always read the relevant `index.md` first** before opening source files — this avoids unnecessary file reads and reduces token usage. Start with `src/index.md` for a full map, then drill into subdirectory indexes as needed.
+
+---
+
 ## Project Overview
 
 A personal portfolio website for a software engineer, built to look and feel exactly like Visual Studio Code. Navigation is file-tree based, content renders as syntax-highlighted code in an editor area, and a terminal panel at the bottom doubles as a contact form. GitHub activity is woven into the UI chrome rather than its own section.
@@ -23,7 +30,7 @@ A personal portfolio website for a software engineer, built to look and feel exa
 | Data fetching | TanStack Query (React Query) + native fetch |
 | Syntax highlighting | prism-react-renderer |
 | GitHub heatmap | Custom SVG component (hand-rolled, no library) |
-| Contact/email | EmailJS or Formspree |
+| Contact/email | EmailJS |
 | Hosting | Vercel |
 
 **No Redux** — TanStack Query + local state is sufficient.
@@ -34,21 +41,21 @@ A personal portfolio website for a software engineer, built to look and feel exa
 
 ## Layout Structure
 
-Four zones mimicking the real VSCode UI:
+Five zones mimicking the real VSCode UI:
 
 ```
 ┌─────────────────────────────────────────────────────┐
 │  Title Bar      [traffic lights]    sayo.site       │
 ├──────────┬──────────────────────────┬───────────────┤
 │ Activity │  Editor Tabs             │               │
-│   Bar    ├──────────────────────────┤               │
-│  (icons) │                          │               │
-├──────────┤     Main Editor          │               │
+│   Bar    ├──────────────────────────┤  Image Panel  │
+│  (icons) │                          │  (per-section │
+├──────────┤     Main Editor          │   gallery)    │
 │  File    │       Area               │               │
 │  Tree    │                          │               │
 │          │                          │               │
 ├──────────┴──────────────────────────┴───────────────┤
-│  Terminal Panel  (contact form)                     │
+│  Terminal Panel  (contact form + GitHub heatmap)    │
 ├─────────────────────────────────────────────────────┤
 │  Status Bar                                         │
 └─────────────────────────────────────────────────────┘
@@ -66,14 +73,14 @@ Each file corresponds to a portfolio section. Clicking a file opens it as a tab 
 │   ├── 👤 about.md           → About Me
 │   ├── 📄 resume.json        → Resume / Experience
 │   ├── 📁 projects
-│   │   ├── 🟦 project1.tsx
-│   │   ├── 🟦 project2.tsx
-│   │   └── 🟦 project3.tsx
+│   │   ├── 🟦 project1.tsx   → tone-chat
+│   │   ├── 🟦 project2.tsx   → ngu-guide
+│   │   └── 🟦 project3.tsx   → happytohelp
 │   └── 🎨 hobbies.css        → Hobbies
 └── 📬 contact.sh             → Focuses the terminal panel
 ```
 
-File icons use language-specific colors matching VSCode (blue `.tsx`, orange `.json`, green `.md`, etc.).
+File icons use language-specific colors matching VSCode (blue `.tsx`, orange `.json`, green `.md`, etc.). Structure is defined in `src/data/fileTree.ts`.
 
 ---
 
@@ -82,93 +89,70 @@ File icons use language-specific colors matching VSCode (blue `.tsx`, orange `.j
 - Each clicked file opens a **tab** at the top of the editor
 - Tabs show filename, language icon, and an `×` to close
 - Active tab is highlighted; inactive tabs are dimmed
-- A **dot** appears on the contact tab when the user starts typing (unsaved changes easter egg)
+- A **dot** appears on the contact tab when the user starts typing (unsaved changes easter egg) — driven by `terminalInput` bool in TabsContext
 - Switching tabs uses a subtle Framer Motion fade/slide transition
 - Each tab maps to a real URL via React Router (`/about`, `/resume`, `/projects/project1`, etc.) for deep-linking
+- Tab state is managed in `TabsContext` via the `useTabs` hook; `/` normalises to `/about`
 
 ---
 
 ## Section Content Design
 
-Each section renders as syntax-highlighted "code" that is also readable content.
+Each section renders as syntax-highlighted "code" that is also readable content. Syntax highlighting is handled by `SyntaxHighlighter.tsx` using prism-react-renderer.
 
 ### `about.md`
-Markdown file format. Raw markdown syntax visible (e.g. `#`, `**bold**`) with a profile photo embedded as a markdown image reference.
+Markdown file format. Raw markdown syntax visible (e.g. `#`, `**bold**`) showing fullName, role, location, bio, and contact links. Content sourced from `aboutContent` in `src/data/content.ts`.
 
 ### `resume.json`
-Pretty-printed, syntax-highlighted JSON:
-```json
-{
-  "name": "...",
-  "experience": [{ "company": "...", "role": "...", "years": "..." }],
-  "skills": ["React", "TypeScript", "Python"]
-}
-```
+Split-pane layout: left side shows pretty-printed, syntax-highlighted JSON with IntelliSense tooltips on hover over TypeScript/React/Node.js keywords; right side shows an embedded resume PDF iframe. Content from `resumeContent` in `src/data/content.ts`.
 
-### `projects/project1.tsx`
-Each project is a fake-but-readable React component. A JSDoc comment block at the top carries the project description, stack, and links:
-```tsx
-/**
- * @project  Project Name
- * @stack    React, Node, PostgreSQL
- * @link     github.com/you/project
- */
-```
-Live demo and GitHub links styled as `@link` JSDoc tags or import statements.
+### `projects/project1–3.tsx`
+Each project generates a fake-but-readable React component from `projectsContent` keyed by route param. Includes import statements built from stack, a JSDoc block with `@project`, `@stack`, `@highlights`, `@link` tags, and a mock component definition. Live demo and GitHub links are clickable (SyntaxHighlighter auto-linkifies URLs).
+
+Projects: `tone-chat` (project1), `ngu-guide` (project2), `happytohelp` (project3).
 
 ### `hobbies.css`
-Each hobby is a CSS class with thematic properties:
-```css
-.photography {
-  frequency: weekends;
-  gear: "Sony A7III";
-  vibe: golden-hour;
-}
-```
+Each hobby is rendered as a CSS class with thematic properties. Content from `hobbiesContent` in `src/data/content.ts`. Hobbies: cooking, gaming, event-planning, hiking.
+
+### `contact.sh`
+Renders `contactContent` as a bash script with EMAIL and GITHUB variables and instructions to use the terminal panel. No interactive form here — the terminal is the form.
+
+---
+
+## Image Panel
+
+A right-side gallery rendered inside `EditorArea` alongside each section. Images are mapped per-route in `src/data/images.ts` (`SECTION_IMAGES`). Clicking a thumbnail opens a lightbox modal; Escape dismisses it. Broken/missing images are hidden gracefully. Component: `src/components/editor/ImagePanel.tsx`.
+
+---
+
+## State Architecture
+
+### Contexts
+- **ThemeContext** (`src/contexts/ThemeContext.tsx`) — exposes `{ theme, cycleTheme, themeLabel }`. Backed by `useTheme` hook with localStorage persistence. Theme syncs to `document.body` class.
+- **TabsContext** (`src/contexts/TabsContext.tsx`) — exposes `{ tabs, activeRoute, openTab, closeTab, activateTab, terminalInput }`. Backed by `useTabs` hook using React Router location/navigate.
+
+### Hooks
+- `useTheme` — theme state + localStorage + body class sync
+- `useTabs` — tab array + routing; normalises `/` → `/about`
+- `useTerminal` — contact form state machine (idle → name → email → message → sending → done/error); commands: `help`, `send-message`, `clear`, `whoami`; EmailJS submission
+- `useGithubData` — fetches from `/api/github` via React Query; returns `heatmapCells[]`, `commitsThisWeek`, `lastPushed`
 
 ---
 
 ## GitHub Integration
 
-GitHub data is ambient — woven into UI chrome, not a dedicated section. Most repos are private so only aggregate, public-API-safe data is shown.
+GitHub data is ambient — woven into UI chrome, not a dedicated section.
 
 ### Data shown
-- **Contribution heatmap** (last 12 weeks) — in the terminal panel
+- **Contribution heatmap** (last 12 weeks) — in the terminal panel header
 - **Commits this week** (count only) — in the status bar
 - **Last pushed time** — in the title bar subtitle
 
-### Placement details
-
-**Terminal panel header** — heatmap renders as a neofetch-style banner above the prompt:
-```
-github/username   ░░▒▒▓▓██▓▒░░▒▓██░░▒▒▓█▓░░
-last 12 weeks     ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-```
-Hovering a cell shows a tooltip: `"3 commits · Mar 12"`.
-
-**Status bar** — a single sync-style item:
-```
-↑ 9 commits this week
-```
-Pulses on first load, then settles. Hover shows a popover with last-updated time.
-
-**Title bar** — understated subtitle:
-```
-● portfolio.code — last pushed 2 hours ago
-```
-
 ### API approach
-Public, unauthenticated GitHub REST API only. No token required.
-
-| Data | Endpoint |
-|---|---|
-| Heatmap + weekly commits | `GET /users/{username}/events/public` — aggregate `PushEvent` by day |
-| Last pushed | `GET /users/{username}` — `updated_at` field |
-
-Degrades gracefully if rate-limited — cells render grey with `"unavailable"` tooltip.
+Data is fetched from the `/api/github` proxy endpoint via React Query (`useGithubData` hook). The hook returns structured data; raw GitHub API calls happen server-side. Degrades gracefully if unavailable — heatmap cells render as grey with `"unavailable"` tooltip.
 
 ### Heatmap implementation
-Hand-rolled SVG component (~50–80 lines). No third-party heatmap library. Uses classic GitHub green palette; cells glow subtly against the dark terminal background.
+Hand-rolled SVG in `GithubHeatmap.tsx` (~12 weeks × 7 days grid). 4-level GitHub green color scale. Hover tooltip shows date and commit count. No third-party heatmap library.
 
 ---
 
@@ -196,18 +180,19 @@ On successful submission:
 ```
 
 ### Implementation notes
-- Custom-built — no terminal library needed
-- A `<div>` of output lines + a hidden `<input>` that captures all keystrokes
-- Command history array in state
-- Panel is **resizable** (drag top edge) and **collapsible**, matching VSCode behaviour
-- Message delivery via EmailJS or Formspree (no backend required)
+- Custom-built — no terminal library
+- `TerminalOutput` renders color-coded lines (output, input, prompt, success, error, info)
+- `TerminalInput` captures keystrokes; Enter submits, ArrowUp/Down navigates history
+- Panel is **resizable** (drag top edge; min 120px, max 600px, default 220px) and **collapsible**
+- Message delivery via EmailJS (wired in `useTerminal`)
+- GitHub heatmap renders as an overlay in the panel header above the prompt
 
 ---
 
 ## Visual Theme
 
 ### Color scheme
-Base: **VSCode Dark+**. Switchable to Monokai and GitHub Light via status bar theme picker (swap a class on `<body>`, all CSS variables update).
+Base: **VSCode Dark+**. Switchable to Monokai and GitHub Light via status bar theme picker (swaps a class on `<body>`, all CSS variables update). Three themes defined in `src/styles/themes.css`.
 
 ### Design tokens (CSS variables, Dark+ palette)
 ```css
@@ -227,7 +212,7 @@ Base: **VSCode Dark+**. Switchable to Monokai and GitHub Light via status bar th
 ```
 
 ### Typography
-- Editor content: `JetBrains Mono` or `Fira Code` with ligatures enabled
+- Editor content: `JetBrains Mono` with ligatures enabled
 - UI chrome (tabs, sidebar, status bar): system sans-serif
 
 ---
@@ -239,30 +224,17 @@ Base: **VSCode Dark+**. Switchable to Monokai and GitHub Light via status bar th
 ```
 
 - Branch always shows `main`
-- Language label updates based on active tab
-- Notification bell animates when a terminal message is sent
-- Theme name on the right — clickable to cycle themes
+- Language label updates based on active tab route
+- Commits this week pulses on first load, then settles; sourced from `useGithubData`
+- Theme name on the right — clickable to cycle through Dark+, Monokai, GitHub Light
+- Notification bell is active (lit) when terminal has pending input (`terminalInput` from TabsContext)
 
 ---
 
 ## Polish & Easter Eggs
 
-- **Cmd+P / Ctrl+P** opens a fake command palette for jumping to any section
-- **Breadcrumb bar** above the editor: `src > projects > project1.tsx`
-- **IntelliSense tooltips** on hover over "keywords" in the resume JSON
-- **Loading splash screen** mimics VSCode startup with an extension loading bar
-
----
-
-## Suggested Build Order
-
-1. Layout shell (title bar, activity bar, panel structure, status bar)
-2. CSS variable system + theme switching
-3. File tree component
-4. Tab system + React Router integration
-5. Section content components (about, resume, projects, hobbies)
-6. `prism-react-renderer` syntax highlighting
-7. GitHub API integration (TanStack Query, heatmap SVG, status bar item)
-8. Terminal panel (input capture, command handling, resize)
-9. Contact form flow + EmailJS/Formspree wiring
-10. Easter eggs + polish (command palette, IntelliSense tooltips, splash screen)
+- **Cmd+P / Ctrl+P** — command palette (`CommandPalette.tsx`); fuzzy-filters 7 portfolio items; keyboard navigable
+- **Breadcrumb bar** — above the editor, derived from current route (e.g. `src › projects › project1.tsx`)
+- **IntelliSense tooltips** — hover over TypeScript/React/Node.js keywords in the resume JSON
+- **Loading splash screen** — mimics VSCode startup with fake extension activations + progress bar; shown once per browser via localStorage
+- **Unsaved dot** — appears on the contact tab whenever the terminal input is non-empty
