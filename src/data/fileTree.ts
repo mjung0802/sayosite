@@ -32,9 +32,9 @@ export const FILE_TREE: FileNode[] = [
             icon: '📁',
             iconColor: '#dcb67a',
             children: [
-              { id: 'project1', name: 'project1.tsx', type: 'file', route: '/projects/project1', icon: 'tsx', iconColor: '#519aba' },
-              { id: 'project2', name: 'project2.tsx', type: 'file', route: '/projects/project2', icon: 'tsx', iconColor: '#519aba' },
-              { id: 'project3', name: 'project3.tsx', type: 'file', route: '/projects/project3', icon: 'tsx', iconColor: '#519aba' },
+              { id: 'tone-chat', name: 'tone-chat.tsx', type: 'file', route: '/projects/tone-chat', icon: 'tsx', iconColor: '#519aba' },
+              { id: 'ngu-guide', name: 'ngu-guide.tsx', type: 'file', route: '/projects/ngu-guide', icon: 'tsx', iconColor: '#519aba' },
+              { id: 'happytohelp', name: 'happytohelp.tsx', type: 'file', route: '/projects/happytohelp', icon: 'tsx', iconColor: '#519aba' },
             ],
           },
           { id: 'hobbies', name: 'hobbies.css', type: 'file', route: '/hobbies', icon: 'css', iconColor: '#519aba' },

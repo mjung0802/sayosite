@@ -45,6 +45,6 @@ ${p.github && !p.github.includes(' ') ? `  const GITHUB_URL = "https://${p.githu
 
 export default function Project() {
   const { id } = useParams<{ id: string }>()
-  const code = buildTsx(id ?? 'project1')
+  const code = buildTsx(id ?? 'tone-chat')
   return <SyntaxHighlighter code={code} language="tsx" wordWrap />
 }

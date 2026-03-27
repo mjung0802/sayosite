@@ -129,7 +129,7 @@ export const resumeContent = {
 }
 
 export const projectsContent: Record<string, Project> = {
-  project1: {
+  'tone-chat': {
     id: 'tone-chat',
     name: 'Tone Chat',
     description: 'A multi-platform chat application built with React Native and Node.js, featuring real-time messaging, tone-based message styling, and customizable themes.',
@@ -142,7 +142,7 @@ export const projectsContent: Record<string, Project> = {
       'Customizable themes and user profiles for a personalized chat experience',
     ],
   },
-  project2: {
+  'ngu-guide': {
     id: 'ngu-guide',
     name: 'NGU Idle Guide',
     description: 'A comprehensive crowdsourced guide for the incremental idle game "NGU Idle", which clarifies complex game mechanics and provides optimal strategies for players to progress efficiently through a game that takes over a year to complete.',
@@ -155,7 +155,7 @@ export const projectsContent: Record<string, Project> = {
       'Built with Astro and React for a fast, responsive experience, and deployed via GitHub Pages with automated CI/CD pipelines',
     ],
   },
-  project3: {
+  'happytohelp': {
     id: 'happytohelp',
     name: "Happy To Help",
     description: 'A web game where players take on the role of an AI LLM assistant, traversing through the history of LLM development and possible futures, while learning about the ethical and societal implications of AI along the way.',
