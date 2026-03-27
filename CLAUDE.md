@@ -38,9 +38,9 @@ Four zones mimicking the real VSCode UI:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  Title Bar      [traffic lights]    portfolio.code  │
+│  Title Bar      [traffic lights]    sayo.site       │
 ├──────────┬──────────────────────────┬───────────────┤
-│ Activity │  Editor Tabs             │  Minimap      │
+│ Activity │  Editor Tabs             │               │
 │   Bar    ├──────────────────────────┤               │
 │  (icons) │                          │               │
 ├──────────┤     Main Editor          │               │
@@ -133,7 +133,7 @@ Each hobby is a CSS class with thematic properties:
 GitHub data is ambient — woven into UI chrome, not a dedicated section. Most repos are private so only aggregate, public-API-safe data is shown.
 
 ### Data shown
-- **Contribution heatmap** (last 12 weeks) — in the terminal panel header
+- **Contribution heatmap** (last 12 weeks) — in the terminal panel
 - **Commits this week** (count only) — in the status bar
 - **Last pushed time** — in the title bar subtitle
 
@@ -250,7 +250,6 @@ Base: **VSCode Dark+**. Switchable to Monokai and GitHub Light via status bar th
 - **Cmd+P / Ctrl+P** opens a fake command palette for jumping to any section
 - **Breadcrumb bar** above the editor: `src > projects > project1.tsx`
 - **IntelliSense tooltips** on hover over "keywords" in the resume JSON
-- **Minimap** on the right — blurry but accurate representation of current section content
 - **Loading splash screen** mimics VSCode startup with an extension loading bar
 
 ---

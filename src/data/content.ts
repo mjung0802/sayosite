@@ -38,7 +38,7 @@ export const aboutContent = {
   name: 'Daniel',
   fullName: 'Daniel Jung',
   role: 'Software Engineer',
-  bio: `Hi, I'm Daniel - a software engineer who loves building interesting projects at the intersection of great UX and solid engineering.
+  bio: `Hi, I'm Daniel (also known as sayo) - a software engineer who loves building interesting projects at the intersection of great UX and solid engineering.
 
 I specialize in full-stack web development using TypeScript (Node.js/React), but I'm flexible with languages and frameworks and always eager to learn new ones. I care about writing clean, maintainable code and shipping products that people actually enjoy using.
 
