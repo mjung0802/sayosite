@@ -55,7 +55,7 @@ export default function ImagePanel() {
               key={name}
               layoutId={`img-${name}`}
               className={styles.thumbnail}
-              src={`/images/${name}.png`}
+              src={`/images/${name}`}
               alt={name}
               onError={() => handleError(name)}
               onClick={() => setSelectedId(name)}
@@ -82,7 +82,7 @@ export default function ImagePanel() {
                 <motion.img
                   layoutId={`img-${selectedId}`}
                   className={styles.lightboxImage}
-                  src={`/images/${selectedId}.png`}
+                  src={`/images/${selectedId}`}
                   alt={selectedId}
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
