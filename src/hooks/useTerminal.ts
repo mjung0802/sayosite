@@ -20,7 +20,7 @@ interface ContactData {
 
 export function useTerminal(onInputChange: (hasInput: boolean) => void) {
   const [lines, setLines] = useState<TerminalLine[]>(() => [
-    mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
+    mkLine('output', "Welcome to DJ's terminal. Type 'help' to begin."),
     mkLine('output', ''),
   ])
   const [step, setStep] = useState<TerminalStep>('idle')
@@ -56,7 +56,7 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
         onInputChange(true)
       } else if (cmd === 'clear') {
         setLines([
-          mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
+          mkLine('output', "Welcome to DJ's terminal. Type 'help' to begin."),
           mkLine('output', ''),
         ])
         onInputChange(false)
@@ -148,7 +148,7 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
     } else if (step === 'done') {
       // Any key clears
       setLines([
-        mkLine('output', "Welcome to MJ's terminal. Type 'help' to begin."),
+        mkLine('output', "Welcome to DJ's terminal. Type 'help' to begin."),
         mkLine('output', ''),
       ])
       setStep('idle')
