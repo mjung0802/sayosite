@@ -119,25 +119,33 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
         append(mkLine('info', '  Sending...'))
         setStep('sending')
 
-        // Send via EmailJS
+        // Send via server-side /api/contact
         try {
-          const emailjs = await import('@emailjs/browser')
           const timeoutPromise = new Promise<never>((_, reject) =>
             setTimeout(() => reject(new Error('Request timed out')), 10000)
           )
-          await Promise.race([
-            emailjs.default.send(
-              import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
-              import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
-              {
-                from_name: finalData.name,
-                from_email: finalData.email,
+          const res = await Promise.race([
+            fetch('/api/contact', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: finalData.name,
+                email: finalData.email,
                 message: finalData.message,
-              },
-              import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '',
-            ),
+              }),
+            }),
             timeoutPromise,
           ])
+          if (res.status === 429) {
+            append(
+              mkLine('error', '  ✘ Too many requests. Please wait a few minutes before trying again.'),
+              mkLine('output', ''),
+            )
+            setStep('idle')
+            onInputChange(false)
+            return
+          }
+          if (!res.ok) throw new Error(`Server error: ${res.status}`)
           append(
             mkLine('success', '  ✔ Message delivered.'),
             mkLine('success', `  ✔ Confirmation sent to ${finalData.email}`),
