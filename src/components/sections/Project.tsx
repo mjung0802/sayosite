@@ -29,14 +29,12 @@ ${highlights}
  *${p.github ? `\n * @link     https://${p.github}` : ''}${p.demo ? `\n * @demo     ${p.demo}` : ''}
  */
 
-export default function ${p.name.replace(/\s+/g, '')}({ id, title, description, stack, links }: ${p.name.replace(/\s+/g, '')}Props) {
+export default function ${p.name.replace(/\s+/g, '')}({ id, title, description }: ${p.name.replace(/\s+/g, '')}Props) {
 ${p.github && !p.github.includes(' ') ? `  const GITHUB_URL = "https://${p.github}"\n` : ''}${p.demo && p.demo.startsWith('https://') ? `  const DEMO_URL = "${p.demo}"\n` : ''}  return (
     <ProjectCard
       id={id}
       title={title}
       description={description}
-      stack={stack}
-      links={links}
     />
   )
 } 

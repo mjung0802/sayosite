@@ -40,7 +40,7 @@ export const aboutContent = {
   role: 'Software Engineer',
   bio: `Hi, I'm Daniel (also known as sayo) - a software engineer who loves building interesting projects at the intersection of great UX and solid engineering.
 
-I specialize in full-stack web development using TypeScript (Node.js/React), but I'm flexible with languages and frameworks and always eager to learn new ones. I care about writing clean, maintainable code and shipping products that people actually enjoy using.
+I specialize in full-stack web development using TypeScript (Node.js/React), but I'm flexible with languages and frameworks and always eager to learn new ones. I care about writing clean, maintainable code and shipping products that people enjoy using.
 
 When I'm not coding, you'll find me cooking for my family, playing games with my fiancée, or hosting events for my community.`,
   location: 'Chandler, AZ',
@@ -163,7 +163,7 @@ export const projectsContent: Record<string, Project> = {
     github: 'github.com/mjung0802/happytohelp (private WIP)',
     demo: 'WIP - not yet publicly available',
     highlights: [
-      'An educational narrative-driven game exploring the history and future of AI LLMs, designed to be accessible and engaging for players of all backgrounds',
+      'A narrative-driven game exploring the history and future of AI LLMs, designed to be accessible and engaging for players of all backgrounds',
       'Players navigate through different eras of AI development, making choices that impact the story and learning about the ethical considerations of AI along the way',
       'Built with Svelte and Vite for a fast, interactive experience, and designed with accessibility in mind to reach a broad audience',
     ],
