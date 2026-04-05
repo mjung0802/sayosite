@@ -95,6 +95,9 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
       if (!emailRe.test(input.trim())) {
         append(mkLine('error', '  Invalid email address.'))
         append(mkLine('prompt', '  Enter your email: '))
+      } else if (input.trim().length > 254) {
+        append(mkLine('error', '  Email address must be 254 characters or fewer.'))
+        append(mkLine('prompt', '  Enter your email: '))
       } else {
         setContactData(prev => ({ ...prev, email: input.trim() }))
         append(mkLine('output', ''))
