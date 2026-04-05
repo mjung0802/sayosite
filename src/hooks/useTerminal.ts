@@ -80,6 +80,9 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
       if (!input.trim()) {
         append(mkLine('error', '  Name cannot be empty.'))
         append(mkLine('prompt', '  Enter your name: '))
+      } else if (input.trim().length > 100) {
+        append(mkLine('error', '  Name must be 100 characters or fewer.'))
+        append(mkLine('prompt', '  Enter your name: '))
       } else {
         setContactData(prev => ({ ...prev, name: input.trim() }))
         append(mkLine('output', ''))
@@ -102,6 +105,9 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
       append(mkLine('input', input))
       if (!input.trim()) {
         append(mkLine('error', '  Message cannot be empty.'))
+        append(mkLine('prompt', '  Enter your message: '))
+      } else if (input.trim().length > 5000) {
+        append(mkLine('error', '  Message must be 5000 characters or fewer.'))
         append(mkLine('prompt', '  Enter your message: '))
       } else {
         const finalData = { ...contactData, message: input.trim() } as ContactData
