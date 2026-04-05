@@ -88,7 +88,7 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
       }
     } else if (step === 'email') {
       append(mkLine('input', input))
-      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const emailRe = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/
       if (!emailRe.test(input.trim())) {
         append(mkLine('error', '  Invalid email address.'))
         append(mkLine('prompt', '  Enter your email: '))
