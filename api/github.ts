@@ -1,5 +1,12 @@
 export const config = { runtime: 'edge' }
 
+function json(body: unknown, status: number): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  })
+}
+
 const USERNAME = 'mjung0802'
 
 const CONTRIBUTIONS_QUERY = `
@@ -27,10 +34,7 @@ export default async function handler(req: Request): Promise<Response> {
 
   const token = process.env.GITHUB_TOKEN
   if (!token) {
-    return new Response(JSON.stringify({ error: 'GitHub token not configured' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return json({ error: 'GitHub token not configured' }, 500)
   }
 
   let from: string, to: string
@@ -39,17 +43,11 @@ export default async function handler(req: Request): Promise<Response> {
     from = body.from
     to = body.to
   } catch {
-    return new Response(JSON.stringify({ error: 'Invalid request body' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return json({ error: 'Invalid request body' }, 400)
   }
 
   if (!from || !to || typeof from !== 'string' || typeof to !== 'string') {
-    return new Response(JSON.stringify({ error: 'Missing required fields: from, to' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    return json({ error: 'Missing required fields: from, to' }, 400)
   }
 
   const response = await fetch('https://api.github.com/graphql', {
@@ -65,8 +63,5 @@ export default async function handler(req: Request): Promise<Response> {
   })
 
   const data = await response.json()
-  return new Response(JSON.stringify(data), {
-    status: response.status,
-    headers: { 'Content-Type': 'application/json' },
-  })
+  return json(data, response.status)
 }

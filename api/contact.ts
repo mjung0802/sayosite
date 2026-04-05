@@ -30,20 +30,20 @@ export default async function handler(req: Request): Promise<Response> {
   let name: string, email: string, message: string
   try {
     const body = await req.json()
-    name = body.name
-    email = body.email
-    message = body.message
+    name = (body.name ?? '').trim()
+    email = (body.email ?? '').trim()
+    message = (body.message ?? '').trim()
   } catch {
     return json({ error: 'Invalid request body' }, 400)
   }
 
-  if (!name?.trim() || name.trim().length > 100) {
+  if (!name || name.length > 100) {
     return json({ error: 'Invalid name' }, 400)
   }
-  if (!EMAIL_RE.test(email?.trim()) || email.trim().length > 254) {
+  if (email.length > 254 || !EMAIL_RE.test(email)) {
     return json({ error: 'Invalid email' }, 400)
   }
-  if (!message?.trim() || message.trim().length > 5000) {
+  if (!message || message.length > 5000) {
     return json({ error: 'Invalid message' }, 400)
   }
 
@@ -63,9 +63,9 @@ export default async function handler(req: Request): Promise<Response> {
       template_id: templateId,
       user_id: userId,
       template_params: {
-        from_name: name.trim(),
-        from_email: email.trim(),
-        message: message.trim(),
+        from_name: name,
+        from_email: email,
+        message,
       },
     }),
   })

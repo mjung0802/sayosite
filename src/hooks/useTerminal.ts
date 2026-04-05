@@ -8,6 +8,8 @@ export interface TerminalLine {
   text: string
 }
 
+const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/
+
 function mkLine(type: TerminalLine['type'], text: string): TerminalLine {
   return { id: crypto.randomUUID(), type, text }
 }
@@ -35,7 +37,6 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
   const handleCommand = useCallback(async (input: string) => {
     const cmd = input.trim().toLowerCase()
 
-    // Add command to history
     setHistory(prev => [input, ...prev].slice(0, 50))
     setHistoryIdx(-1)
 
@@ -69,7 +70,6 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
           mkLine('output', ''),
         )
       } else if (cmd === '') {
-        // do nothing
       } else {
         append(mkLine('error', `  command not found: ${input}`))
         append(mkLine('output', "  Type 'help' for available commands."))
@@ -91,12 +91,11 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
       }
     } else if (step === 'email') {
       append(mkLine('input', input))
-      const emailRe = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/
-      if (!emailRe.test(input.trim())) {
-        append(mkLine('error', '  Invalid email address.'))
-        append(mkLine('prompt', '  Enter your email: '))
-      } else if (input.trim().length > 254) {
+      if (input.trim().length > 254) {
         append(mkLine('error', '  Email address must be 254 characters or fewer.'))
+        append(mkLine('prompt', '  Enter your email: '))
+      } else if (!EMAIL_RE.test(input.trim())) {
+        append(mkLine('error', '  Invalid email address.'))
         append(mkLine('prompt', '  Enter your email: '))
       } else {
         setContactData(prev => ({ ...prev, email: input.trim() }))
@@ -114,12 +113,10 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
         append(mkLine('prompt', '  Enter your message: '))
       } else {
         const finalData = { ...contactData, message: input.trim() } as ContactData
-        setContactData(finalData)
         append(mkLine('output', ''))
         append(mkLine('info', '  Sending...'))
         setStep('sending')
 
-        // Send via server-side /api/contact
         try {
           const timeoutPromise = new Promise<never>((_, reject) =>
             setTimeout(() => reject(new Error('Request timed out')), 10000)
@@ -163,7 +160,6 @@ export function useTerminal(onInputChange: (hasInput: boolean) => void) {
         }
       }
     } else if (step === 'done') {
-      // Any key clears
       setLines([
         mkLine('output', "Welcome to DJ's terminal. Type 'help' to begin."),
         mkLine('output', ''),
