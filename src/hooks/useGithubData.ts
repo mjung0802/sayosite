@@ -24,25 +24,7 @@ interface ContributionWeek {
   contributionDays: ContributionDay[]
 }
 
-const USERNAME = 'mjung0802'
-
-const GITHUB_QUERY = `
-  query($login: String!, $from: DateTime!, $to: DateTime!) {
-    user(login: $login) {
-      updatedAt
-      contributionsCollection(from: $from, to: $to) {
-        contributionCalendar {
-          weeks {
-            contributionDays {
-              date
-              contributionCount
-            }
-          }
-        }
-      }
-    }
-  }
-`
+const GITHUB_QUERY_KEY = 'github-contributions'
 
 function formatRelativeTime(isoDate: string): string {
   const diff = Date.now() - new Date(isoDate).getTime()
@@ -89,12 +71,8 @@ async function fetchGithubContributions() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      query: GITHUB_QUERY,
-      variables: {
-        login: USERNAME,
-        from: from.toISOString(),
-        to: now.toISOString(),
-      },
+      from: from.toISOString(),
+      to: now.toISOString(),
     }),
   })
 
@@ -106,7 +84,7 @@ async function fetchGithubContributions() {
 
 export function useGithubData(): GithubData {
   const query = useQuery({
-    queryKey: ['github-contributions', USERNAME],
+    queryKey: [GITHUB_QUERY_KEY],
     queryFn: fetchGithubContributions,
     staleTime: 1000 * 60 * 60,
     retry: 1,
