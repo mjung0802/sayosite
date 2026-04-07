@@ -1,6 +1,5 @@
 import SyntaxHighlighter from '../editor/SyntaxHighlighter'
 import { resumeContent } from '../../data/content'
-import IntelliSenseTooltip from '../ui/IntelliSenseTooltip'
 import styles from './Resume.module.css'
 
 function formatResumeJson(content: typeof resumeContent): string {
@@ -27,45 +26,6 @@ export default function Resume() {
         </div>
         <div className={`${styles.paneContent} ${styles.jsonContent}`}>
           <SyntaxHighlighter code={code} language="json" wordWrap />
-          <div className={styles.annotations}>
-            <div className={styles.annotationTitle}>// IntelliSense</div>
-            {[
-              {
-                word: 'TypeScript',
-                definition: {
-                  name: 'TypeScript',
-                  type: 'Language',
-                  description: 'Typed superset of JavaScript. Primary language for all projects.',
-                  source: 'skills',
-                },
-              },
-              {
-                word: 'React',
-                definition: {
-                  name: 'React',
-                  type: 'Framework',
-                  description: 'UI library for building component-based interfaces.',
-                  source: 'skills',
-                },
-              },
-              {
-                word: 'Node.js',
-                definition: {
-                  name: 'Node.js',
-                  type: 'Runtime',
-                  description: 'JavaScript runtime for server-side and backend services.',
-                  source: 'skills',
-                },
-              },
-            ].map(item => (
-              <div key={item.word} className={styles.annotationItem}>
-                <IntelliSenseTooltip word={item.word} definition={item.definition}>
-                  <span className={styles.token}>{item.word}</span>
-                </IntelliSenseTooltip>
-                <span className={styles.type}>{item.definition.type}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 

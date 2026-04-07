@@ -131,14 +131,15 @@ export const projectsContent: Record<string, Project> = {
   'tone-chat': {
     id: 'tone-chat',
     name: 'Tone Chat',
-    description: 'A multi-platform chat application built with React Native and Node.js, featuring real-time messaging, tone-based message styling, and customizable themes.',
+    description: 'A real-time chat application featuring tone-based message styling, customizable themes, and server management',
     stack: ['Node.js', 'TypeScript', 'React Native', 'Docker', 'Express', 'Socket.io', 'MongoDB', 'PostgreSQL', 'GitHub Actions'],
-    github: 'github.com/mjung0802/tone-chat (private WIP)',
+    github: 'github.com/mjung0802/tone-chat',
     demo: 'WIP - not yet publicly available',
     highlights: [
-      'Real-time messaging with WebSockets and Socket.io',
+      'Real-time messaging with an Express server routing WebSockets through Socket.io',
       'Tone-based message styling so users can express emotions through their messages',
-      'Customizable themes and user profiles for a personalized chat experience',
+      'Easily self-hostable to deploy to your own server via Docker, storage through PostgreSQL, MongoDB, and S3',
+      'Multi-platform support via React Native and Expo to target web, iOS, and Android with a single codebase',
     ],
   },
   'ngu-guide': {
@@ -157,7 +158,7 @@ export const projectsContent: Record<string, Project> = {
   'happytohelp': {
     id: 'happytohelp',
     name: "Happy To Help",
-    description: 'A web game where players take on the role of an AI LLM assistant, traversing through the history of LLM development and possible futures, while learning about the ethical and societal implications of AI along the way.',
+    description: 'A web game where players take on the role of an AI LLM assistant, traversing through the history of LLM development and possible futures, while learning about the ethical and societal implications of AI.',
     stack: ['Svelte', 'Vite', 'TypeScript'],
     github: 'github.com/mjung0802/happytohelp (private WIP)',
     demo: 'WIP - not yet publicly available',
