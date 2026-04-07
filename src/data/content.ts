@@ -38,15 +38,14 @@ export const aboutContent = {
   name: 'Daniel',
   fullName: 'Daniel Jung',
   role: 'Software Engineer',
-  bio: `Hi, I'm Daniel (also known as sayo) - a software engineer who loves building interesting projects at the intersection of great UX and solid engineering.
+  bio: `Hi, I'm Daniel, or sometimes known as sayo - a software engineer who loves building interesting projects at the intersection of great UX and solid engineering.
 
-I specialize in full-stack web development using TypeScript (Node.js/React), but I'm flexible with languages and frameworks and always eager to learn new ones. I care about writing clean, maintainable code and shipping products that people enjoy using.
+I specialize in full-stack web development using TypeScript (Node.js/React), but I'm flexible with languages and frameworks and always eager to learn new ones. I care about writing clean, maintainable code and shipping products that people enjoy using. I love exploring the ways that technology can solve real problems and improve people's lives.
 
 When I'm not coding, you'll find me cooking for my family, playing games with my fiancée, or hosting events for my community.`,
   location: 'Chandler, AZ',
   email: 'daniel0802@gmail.com',
   github: 'https://github.com/mjung0802',
-  photo: null,
 }
 
 export const resumeContent = {
@@ -58,14 +57,14 @@ export const resumeContent = {
     location: 'Chandler, AZ',
     github: 'github.com/mjung0802',
   },
-  summary: 'Full-stack engineer with 6+ years of experience building scalable web and mobile applications across enterprise, SaaS, and early-stage startup environments. Specializes in AI-powered product development, behavior-driven test automation, and end-to-end ownership.',
+  summary: 'Full-stack engineer with 6+ years of experience building scalable applications across enterprise, SaaS, and early-stage startup environments. Specializes in AI-powered product development, behavior-driven test automation, and end-to-end ownership — from requirements gathering and system design to deployment and production support. Track record of measurable impact: reducing error rates, cutting costs, and accelerating customer growth.',
   skills: {
-    'Back-End': ['Node.js', 'Java/Spring', 'Python'],
-    'Front-End': ['JavaScript/TypeScript', 'React/React Native', 'Angular'],
-    'Databases': ['MySQL', 'SQL Server', 'PostgreSQL', 'MongoDB'],
-    'Testing': ['Selenium', 'Jest', 'Cypress', 'Cucumber'],
-    'API': ['REST', 'SOAP', 'Microservices', 'Event-Driven'],
-    'Cloud & DevOps': ['AWS', 'Vercel', 'Jenkins', 'GitHub Actions'],
+    'Languages':      ['JavaScript', 'TypeScript', 'Java', 'Python'],
+    'Frameworks':     ['Node.js', 'React', 'Angular', 'Spring', 'Next.js'],
+    'Databases':      ['MySQL', 'SQL Server', 'PostgreSQL', 'MongoDB'],
+    'Testing':        ['Selenium', 'Jest', 'Cypress', 'Cucumber', 'Playwright'],
+    'API':            ['REST', 'SOAP', 'Postman', 'Microservices'],
+    'Cloud & DevOps': ['AWS Lambda/S3/API Gateway', 'Jenkins', 'GitHub Actions'],
   },
   experience: [
     {
@@ -74,11 +73,11 @@ export const resumeContent = {
       role: 'Software Engineer',
       period: 'Apr 2023 - Jan 2026',
       highlights: [
-        'Designed and shipped an AI-powered app builder converting business requirements into React Native web/mobile apps, improving operational efficiency by 20%',
-        'Drove new customer acquisitions by 3x through tailored AI consulting engagements',
-        'Owned the full product lifecycle — client discovery, system architecture, UI design system, implementation, and automated behavior-driven testing suite',
+        'Designed and shipped an AI-powered app builder that converts business requirements into React Native web/mobile apps, enabling B2B clients to surface actionable data insights and improving operational efficiency by 20%',
+        'Drove new customer acquisitions by 3x through tailored AI consulting engagements, translating client pain points into cloud-native production-ready technical solutions',
+        'Owned the full product lifecycle - client discovery, system architecture, UI design system, implementation, and a fully automated behavior-driven testing suite',
       ],
-      tech: ['Node.js/Python', 'TypeScript/React Native', 'AWS/Vercel', 'Selenium/Storybook', 'REST', 'GitHub Actions'],
+      tech: ['Node.js/Python', 'TypeScript/React Native', 'AWS (Lambda, S3, Dynamo)', 'Storybook', 'REST', 'GitHub Actions'],
     },
     {
       company: 'MessageGears',
@@ -87,11 +86,11 @@ export const resumeContent = {
       period: 'Oct 2021 - Sept 2022',
       highlights: [
         'Built personalization features for an enterprise marketing SaaS, increasing client engagement metrics by 120%',
-        'Led front-end modernization migrating legacy JSP to Angular 9, cutting production error rates by 80%',
-        'Delivered technical product demos to enterprise clients; feedback directly shaped the product roadmap',
-        'Mentored interns and coordinated cross-functional sprint planning',
+        'Led front-end modernization by migrating legacy JSP to Angular 9 alongside a comprehensive automated testing suite, cutting production error rates by 80%',
+        'Delivered technical product demos to enterprise clients and internal stakeholders, gathering feedback that directly shaped the product roadmap',
+        'Mentored interns and coordinated cross-functional sprint planning, improving team velocity and knowledge sharing',
       ],
-      tech: ['Java/Node.js', 'TypeScript/Angular', 'AWS', 'Selenium/Cypress/Jest', 'REST', 'Jenkins/GitHub Actions'],
+      tech: ['Java/Node.js', 'TypeScript/Angular', 'AWS (Lambda)', 'Selenium/Cypress', 'REST', 'Jenkins/GitHub Actions'],
     },
     {
       company: 'Itential',
@@ -100,8 +99,8 @@ export const resumeContent = {
       period: 'Sept 2020 - Sept 2021',
       highlights: [
         'Led an engineering team building network automation solutions supporting the nationwide 5G infrastructure rollout',
-        'Architected a proprietary automated testing framework eliminating the need for a 40-person technical support team',
-        'Doubled operational efficiency by surfacing real-time production insights for non-technical teams',
+        'Architected a proprietary automated testing framework with granular error detection and self-correction capabilities, eliminating the need for a 40-person technical support team and handing oversight directly to business stakeholders',
+        'Doubled operational efficiency by surfacing real-time production insights and enabling non-technical teams to self-serve on issue resolution',
       ],
       tech: ['Node.js/Java', 'TypeScript/Angular', 'MongoDB', 'Selenium/Jest', 'REST/SOAP', 'Jenkins/GitHub Actions'],
     },
@@ -111,9 +110,9 @@ export const resumeContent = {
       role: 'Software Developer',
       period: 'Sept 2019 - Sept 2020',
       highlights: [
-        'Streamlined order intake via cloud-native microservices, saving an estimated $20M annually',
-        'Piloted an Agile pair/mob programming initiative, improving cross-team knowledge transfer',
-        'Expanded a manual back-end testing suite into a full stack end-to-end behavior-driven automated testing framework',
+        'Streamlined order intake via cloud-native microservices, reducing overproduction and saving an estimated $20M annually',
+        'Piloted an Agile pair/mob programming initiative and presented findings department-wide, improving cross-team knowledge transfer',
+        'Expanded a manual back-end testing suite into a full stack, end-to-end behavior-driven automated testing framework',
       ],
       tech: ['Java/Spring Boot', 'TypeScript/Angular', 'SQL', 'Selenium/Cypress/Cucumber', 'PCF', 'REST', 'Jenkins'],
     },
