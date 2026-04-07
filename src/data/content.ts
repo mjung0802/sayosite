@@ -57,14 +57,20 @@ export const resumeContent = {
     location: 'Chandler, AZ',
     github: 'github.com/mjung0802',
   },
-  summary: 'Full-stack engineer with 6+ years of experience building scalable applications across enterprise, SaaS, and early-stage startup environments. Specializes in AI-powered product development, behavior-driven test automation, and end-to-end ownership — from requirements gathering and system design to deployment and production support. Track record of measurable impact: reducing error rates, cutting costs, and accelerating customer growth.',
+  summary: [
+    '6+ years of experience building scalable applications across enterprise, SaaS, and early-stage startup environments',
+    'Specializes in AI-powered product development, behavior-driven test automation, and end-to-end product ownership from requirements gathering and system design to deployment and production support.',
+    'Track record of measurable impact: reducing error rates, cutting costs, and accelerating customer growth.',
+  ],
   skills: {
-    'Languages':      ['JavaScript', 'TypeScript', 'Java', 'Python'],
-    'Frameworks':     ['Node.js', 'React', 'Angular', 'Spring', 'Next.js'],
+    'Languages':      ['TypeScript', 'Java', 'JavaScript', 'Python'],
+    'Back-End':       ['Node.js', 'Next.js', 'Spring', 'Spring Boot'],
+    'Front-End':      ['React', 'Angular', 'Svelte', 'Astro', 'React Native', 'Expo'],
     'Databases':      ['MySQL', 'SQL Server', 'PostgreSQL', 'MongoDB'],
-    'Testing':        ['Selenium', 'Jest', 'Cypress', 'Cucumber', 'Playwright'],
-    'API':            ['REST', 'SOAP', 'Postman', 'Microservices'],
-    'Cloud & DevOps': ['AWS Lambda/S3/API Gateway', 'Jenkins', 'GitHub Actions'],
+    'API':            ['REST', 'SOAP', 'WebSockets', 'Postman', 'Microservices'],
+    'Testing':        ['Selenium', 'Jest', 'Cypress', 'Cucumber', 'Playwright', 'Storybook'],
+    'Cloud & DevOps': ['AWS (Lambda/S3/DynamoDB)', 'Jenkins', 'GitHub Actions'],
+    'Hats Worn':      ['UI/UX Design', 'Project Management', 'Customer Support'],
   },
   experience: [
     {
