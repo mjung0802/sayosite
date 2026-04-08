@@ -8,4 +8,4 @@
 | [`layout/`](./layout/index.md) | AppLayout, ActivityBar, FileTree, TitleBar, StatusBar |
 | [`sections/`](./sections/index.md) | About, Resume, Project, Hobbies, Contact — the portfolio content views |
 | [`terminal/`](./terminal/index.md) | TerminalPanel, TerminalInput, TerminalOutput, GithubHeatmap |
-| [`ui/`](./ui/index.md) | CommandPalette, IntelliSenseTooltip, SplashScreen |
+| [`ui/`](./ui/index.md) | CommandPalette, SplashScreen |

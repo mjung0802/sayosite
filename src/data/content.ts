@@ -53,7 +53,6 @@ export const resumeContent = {
   title: 'Full-Stack Software Engineer',
   contact: {
     email: 'daniel0802@gmail.com',
-    phone: '480-433-6697',
     location: 'Chandler, AZ',
     github: 'github.com/mjung0802',
   },
