@@ -47,9 +47,11 @@ export default function AppLayout() {
         <div className={styles.workbench}>
           <ActivityBar onToggleFileTree={() => setFileTreeVisible(v => !v)} />
           {fileTreeVisible && <FileTree />}
-          <EditorArea />
+          <div className={styles.rightColumn}>
+            <EditorArea />
+            <TerminalPanel />
+          </div>
         </div>
-        <TerminalPanel />
         <StatusBar />
       </div>
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />

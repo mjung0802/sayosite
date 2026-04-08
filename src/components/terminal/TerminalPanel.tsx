@@ -1,9 +1,7 @@
 import { useRef, useCallback, useState } from 'react'
 import { useTabsContext } from '../../contexts/TabsContext'
-import { useGithubData } from '../../hooks/useGithubData'
 import { contactContent } from '../../data/content'
 import { useTerminal } from '../../hooks/useTerminal'
-import GithubHeatmap from './GithubHeatmap'
 import TerminalOutput from './TerminalOutput'
 import TerminalInput from './TerminalInput'
 import styles from './TerminalPanel.module.css'
@@ -14,7 +12,6 @@ const DEFAULT_HEIGHT = 220
 
 export default function TerminalPanel() {
   const { setTerminalHasInput } = useTabsContext()
-  const { heatmapData, isError } = useGithubData()
 
   const { lines, step, handleCommand, navigateHistory } = useTerminal(setTerminalHasInput)
 
@@ -80,12 +77,7 @@ export default function TerminalPanel() {
         </button>
       </div>
 
-      {/* Heatmap overlaid on terminal body, absolutely positioned */}
-      <div className={styles.heatmapOverlay}>
-        <GithubHeatmap cells={heatmapData} isError={isError} />
-      </div>
-
-      {/* Text area — restricted horizontally via padding-right */}
+      {/* Text area */}
       <div className={styles.terminalBody}>
         <TerminalOutput lines={lines} />
         <TerminalInput

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useTabsContext } from '../../contexts/TabsContext'
 import { FILE_TREE, FILE_ICON_LABELS, FILE_ICON_COLORS } from '../../data/fileTree'
 import type { FileNode } from '../../data/fileTree'
+import { useGithubData } from '../../hooks/useGithubData'
+import GithubHeatmap from '../terminal/GithubHeatmap'
 import styles from './FileTree.module.css'
 
 interface FileTreeNodeProps {
@@ -64,12 +66,19 @@ function FileTreeNode({ node, depth }: FileTreeNodeProps) {
 }
 
 export default function FileTree() {
+  const { heatmapData, isError } = useGithubData()
   return (
     <div className={styles.fileTree}>
       <div className={styles.header}>EXPLORER</div>
-      {FILE_TREE.map(node => (
-        <FileTreeNode key={node.id} node={node} depth={0} />
-      ))}
+      <div className={styles.treeContent}>
+        {FILE_TREE.map(node => (
+          <FileTreeNode key={node.id} node={node} depth={0} />
+        ))}
+      </div>
+      <div className={styles.heatmapSection}>
+        <div className={styles.heatmapLabel}>GITHUB ACTIVITY</div>
+        <GithubHeatmap cells={heatmapData} isError={isError} />
+      </div>
     </div>
   )
 }
